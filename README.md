@@ -15,5 +15,5 @@ DX12 C++ Wrapper
 ## Set up
 
 * *C++20*
-* *MSVC only*
+* *MSVC/Clang*
 * *DirectXTK12* 
