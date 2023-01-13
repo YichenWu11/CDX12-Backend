@@ -1,5 +1,6 @@
 # TODOS
 
 - [ ] GPUResource (Base class) ---> Mesh and Texture
-- [ ] Light ---> 3 or more
+- [ ] Refactor the structure of `Light`
+- [ ] Impl the underlying `rhi`
 

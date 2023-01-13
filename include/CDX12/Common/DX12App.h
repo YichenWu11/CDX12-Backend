@@ -17,7 +17,6 @@
 #include "../DescripitorHeap/DescriptorHeapWrapper.h"
 #include "../DescripitorHeap/GPUDescriptorHeap.h"
 
-
 #include "../CmdQueue.h"
 #include "../DXUtil.h"
 #include "../DescriptorHeapMngr.h"
@@ -26,7 +25,6 @@
 #include "../GeneralDesc.h"
 #include "../Metalib.h"
 #include "../RenderResourceMngr.h"
-
 
 namespace Chen::CDX12 {
     class DX12App {
@@ -96,9 +94,10 @@ namespace Chen::CDX12 {
         bool      mResizing        = false;   // are the resize bars being dragged?
         bool      mFullscreenState = false;
 
-        GameTimer                              mTimer;
-        Device                                 mDevice;
-        Microsoft::WRL::ComPtr<IDXGIFactory4>  mdxgiFactory;
+        GameTimer                             mTimer;
+        Device                                mDevice;
+        Microsoft::WRL::ComPtr<IDXGIFactory4> mdxgiFactory;
+
         static const int                       SwapChainBufferCount = 2;
         int                                    mCurrBackBuffer      = 0;
         Microsoft::WRL::ComPtr<IDXGISwapChain> mSwapChain;
