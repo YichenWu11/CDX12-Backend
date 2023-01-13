@@ -32,8 +32,8 @@
 * 流输出视图     (SOV)
   
 ## Possible rendering processes
-<img src="./images/process.png">
-</br>
+![process](./images/process.png)
+
 
 其他描述符类型、渲染器目标视图 (RTV)、深度模板视图 (DSV)、索引缓冲区视图 (IBV)、顶点缓冲区视图 (VBV) 和着色器对象视图 (SOV) 以不同的方式进行管理.
 
@@ -41,8 +41,8 @@
 
 # Descriptor
 
-描述符是一个相对较小的数据块，它完全描述 GPU 的对象，采用特定于 GPU 的不透明格式. </br>
-无需释放对象描述符。 驱动程序不会为描述符创建附加任何分配。 但是，描述符可能会对应用程序永久拥有的其他分配的引用进行编码. </br>
+描述符是一个相对较小的数据块，它完全描述 GPU 的对象，采用特定于 GPU 的不透明格式. 
+无需释放对象描述符。 驱动程序不会为描述符创建附加任何分配。 但是，描述符可能会对应用程序永久拥有的其他分配的引用进行编码. 
 使用描述符的主要方法是将它们放置在描述符堆中，这些描述符堆是描述符的后备内存.
 
 *描述符句柄是描述符的唯一地址, 句柄在描述符堆中唯一*
@@ -60,8 +60,8 @@ Fill the xxx_BUFFER_VIEW_DESC, then use it to create a Descriptor.
 
 * 索引缓冲区视图 (IBV) 、顶点缓冲区视图 (VBV) ，将流输出视图 (SOV) 直接传递到 API 方法，没有特定的堆类型
   
-<img src="./images/view.png">
-<img src="./images/support.png">
+![view](./images/view.png)
+![support](./images/support.png)
 
 ---
 

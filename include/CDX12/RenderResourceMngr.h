@@ -6,7 +6,6 @@
 #include "./Shader/PSOManager.h"
 #include "./Shader/ShaderMngr.h"
 
-
 namespace Chen::CDX12 {
     class RenderResourceMngr {
     public:
@@ -19,7 +18,6 @@ namespace Chen::CDX12 {
 
         MaterialMngr* GetMatMngr() { return matMngr; }
         TextureMngr*  GetTexMngr() { return texMngr; }
-        MeshMngr*     GetMeshMngr() { return meshMngr; }
         ShaderMngr*   GetShaderMngr() { return shaderMngr; }
         PSOManager*   GetPSOMngr() { return psoMngr; }
 
@@ -33,7 +31,6 @@ namespace Chen::CDX12 {
 
         MaterialMngr* matMngr{nullptr};
         TextureMngr*  texMngr{nullptr};
-        MeshMngr*     meshMngr{nullptr};
         ShaderMngr*   shaderMngr{nullptr};
         PSOManager*   psoMngr{nullptr};
     };

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "MathHelper.h"
+#include <CDX12/Math/MathHelper.h>
 
 using namespace DirectX;
 

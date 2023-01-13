@@ -1,56 +1,17 @@
 #pragma once
 
-#include "../_deps/tinyobjloader/tinyobjloader.h"
-#include "Mesh.h"
 #include <map>
 
+#include <CDX12/_deps/tinyobjloader/tinyobjloader.h>
+
+#include <CDX12/Geometry/Mesh.h>
 
 namespace Chen::CDX12 {
-
-    // vertex
-    struct Vertex {
-        DirectX::XMFLOAT3 Pos;
-        DirectX::XMFLOAT3 Normal;
-        DirectX::XMFLOAT2 TexC;
-        DirectX::XMFLOAT3 TangentU;
+    struct Vertex : public rtti::Struct {
+        rtti::Var<DirectX::XMFLOAT3> position  = "POSITION";
+        rtti::Var<DirectX::XMFLOAT3> normal    = "NORMAL";
+        rtti::Var<DirectX::XMFLOAT2> tex_coord = "TEXCOORD";
+        rtti::Var<DirectX::XMFLOAT3> tangent_u = "TANGENT";
     };
 
-    class MeshMngr {
-    public:
-        enum class MeshFileFormat : uint8_t {
-            txt = 0,
-        };
-
-        MeshMngr(ID3D12Device* device, ID3D12GraphicsCommandList* cmdList);
-        ~MeshMngr()                          = default;
-        MeshMngr(const MeshMngr&)            = delete;
-        MeshMngr& operator=(const MeshMngr&) = delete;
-
-        MeshGeometry* GetMeshGeo(const std::string& name) {
-            bool is = mGeometries.find(name) != mGeometries.end();
-            return (mGeometries.find(name) != mGeometries.end()) ? mGeometries.at(name).get() : nullptr;
-        }
-
-        std::map<std::string, std::unique_ptr<MeshGeometry>>& GetAllGeos() {
-            return mGeometries;
-        }
-
-        void BuildBasicGeo();
-
-        void BuildTXTModelGeometryFromFile(
-            const char* path,
-            const char* geoName,
-            const char* subName,
-            bool        is_normal,
-            bool        is_uv);
-
-        void BuildOBJModelGeometryFromFile(
-            const char* path,
-            const char* geoName);
-
-    private:
-        ID3D12Device*                                        device;
-        ID3D12GraphicsCommandList*                           cmdList;
-        std::map<std::string, std::unique_ptr<MeshGeometry>> mGeometries;
-    };
 } // namespace Chen::CDX12

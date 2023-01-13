@@ -7,7 +7,6 @@ void RenderResourceMngr::Init(ID3D12Device* device, ID3D12GraphicsCommandList* c
 
     matMngr    = new MaterialMngr();
     texMngr    = new TextureMngr(device);
-    meshMngr   = new MeshMngr(device, cmdList);
     shaderMngr = new ShaderMngr(device);
     psoMngr    = new PSOManager();
 
@@ -19,13 +18,11 @@ void RenderResourceMngr::Clear() {
 
     delete matMngr;
     delete texMngr;
-    delete meshMngr;
     delete shaderMngr;
     delete psoMngr;
 
     matMngr    = nullptr;
     texMngr    = nullptr;
-    meshMngr   = nullptr;
     shaderMngr = nullptr;
     psoMngr    = nullptr;
 }

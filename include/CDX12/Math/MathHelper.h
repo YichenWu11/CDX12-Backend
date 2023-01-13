@@ -4,7 +4,6 @@
 #include <Windows.h>
 #include <cstdint>
 
-
 namespace Chen::CDX12::Math {
 
     class MathHelper {

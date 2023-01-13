@@ -1,9 +1,5 @@
 #pragma once
 
-#ifndef UNICODE
-#define UNICODE
-#endif
-
 // FIXME: Error --> "No Target Architecture"
 //#include <winnt.h>
 //#if defined(DEBUG) || defined(_DEBUG)

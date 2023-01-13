@@ -1,7 +1,7 @@
 # CDX12
 DX12 C++ Wrapper
 
-<img src="./docs/images/Descriptor_Heap.png">
+<img src="./docs/cdx12-note/images/Descriptor_Heap.png">
 
 ---
 
