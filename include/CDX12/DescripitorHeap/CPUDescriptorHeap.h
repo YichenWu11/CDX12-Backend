@@ -1,13 +1,13 @@
 #pragma once
 
-#include "IDescriptorAllocator.h"
 #include "DescriptorHeapAllocationMngr.h"
+#include "IDescriptorAllocator.h"
+
 
 #include <unordered_set>
 
-
 namespace Chen::CDX12 {
-	// CPU descriptor heap is intended to provide storage for resource view descriptor handles.
+    // CPU descriptor heap is intended to provide storage for resource view descriptor handles.
     // It contains a pool of DescriptorHeapAllocationMngr object instances, where every instance manages
     // its own CPU-only D3D12 descriptor heap:
     //
@@ -32,15 +32,15 @@ namespace Chen::CDX12 {
                           D3D12_DESCRIPTOR_HEAP_TYPE  Type,
                           D3D12_DESCRIPTOR_HEAP_FLAGS Flags);
 
-        CPUDescriptorHeap            (const CPUDescriptorHeap&) = delete;
-        CPUDescriptorHeap            (CPUDescriptorHeap&&)      = delete;
-        CPUDescriptorHeap& operator= (const CPUDescriptorHeap&) = delete;
-        CPUDescriptorHeap& operator= (CPUDescriptorHeap&&)      = delete;
+        CPUDescriptorHeap(const CPUDescriptorHeap&)            = delete;
+        CPUDescriptorHeap(CPUDescriptorHeap&&)                 = delete;
+        CPUDescriptorHeap& operator=(const CPUDescriptorHeap&) = delete;
+        CPUDescriptorHeap& operator=(CPUDescriptorHeap&&)      = delete;
 
         ~CPUDescriptorHeap();
 
         virtual DescriptorHeapAllocation Allocate(uint32_t Count) override final;
-        virtual void Free(DescriptorHeapAllocation&& Allocation) override final;
+        virtual void                     Free(DescriptorHeapAllocation&& Allocation) override final;
 
         virtual uint32_t GetDescriptorSize() const noexcept override final { return m_DescriptorSize; }
 
@@ -48,16 +48,16 @@ namespace Chen::CDX12 {
         ID3D12Device* m_pDevice;
 
         // Pool of descriptor heap managers
-        std::mutex                                    m_HeapPoolMutex;
-        std::vector<DescriptorHeapAllocationMngr>          m_HeapPool;
+        std::mutex                                m_HeapPoolMutex;
+        std::vector<DescriptorHeapAllocationMngr> m_HeapPool;
         // Indices of available descriptor heap managers
-        std::unordered_set<size_t>                    m_AvailableHeaps;
+        std::unordered_set<size_t> m_AvailableHeaps;
 
         D3D12_DESCRIPTOR_HEAP_DESC m_HeapDesc;
         const UINT                 m_DescriptorSize = 0;
 
         // Maximum heap size during the application lifetime - for statistic purposes
         uint32_t m_MaxSize     = 0;
-        uint32_t m_CurrentSize = 0;        
+        uint32_t m_CurrentSize = 0;
     };
-}
+} // namespace Chen::CDX12

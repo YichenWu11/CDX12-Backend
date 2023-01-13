@@ -3,7 +3,6 @@
 #include <deque>
 #include <map>
 
-
 namespace Chen::CDX12 {
     // The class handles free memory block management to accommodate variable-size allocation requests.
     // It keeps track of free blocks only and does not record allocation sizes. The class uses two ordered maps

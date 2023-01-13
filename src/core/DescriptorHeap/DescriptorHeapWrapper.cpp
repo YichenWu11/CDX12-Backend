@@ -3,9 +3,8 @@
 using namespace Chen::CDX12;
 
 HRESULT DescriptorHeapWrapper::Create(
-    ID3D12Device* pDevice,
-    const D3D12_DESCRIPTOR_HEAP_DESC* desc)
-{
+    ID3D12Device*                     pDevice,
+    const D3D12_DESCRIPTOR_HEAP_DESC* desc) {
     HRESULT hr = pDevice->CreateDescriptorHeap(desc, IID_PPV_ARGS(raw.GetAddressOf()));
     if (FAILED(hr)) return hr;
 
@@ -13,21 +12,20 @@ HRESULT DescriptorHeapWrapper::Create(
     hGPUHeapStart = raw->GetGPUDescriptorHandleForHeapStart();
 
     HandleIncrementSize = pDevice->GetDescriptorHandleIncrementSize(Desc.Type);
-    Desc = *desc;
+    Desc                = *desc;
     return hr;
 }
 
 HRESULT DescriptorHeapWrapper::Create(
-    ID3D12Device* pDevice,
+    ID3D12Device*              pDevice,
     D3D12_DESCRIPTOR_HEAP_TYPE Type,
-    UINT NumDescriptors,
-    bool bShaderVisible)
-{
+    UINT                       NumDescriptors,
+    bool                       bShaderVisible) {
     D3D12_DESCRIPTOR_HEAP_DESC Desc;
-    Desc.Type = Type;
+    Desc.Type           = Type;
     Desc.NumDescriptors = NumDescriptors;
-    Desc.Flags = (bShaderVisible ? D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE : D3D12_DESCRIPTOR_HEAP_FLAG_NONE);
-    Desc.NodeMask = 0;
+    Desc.Flags          = (bShaderVisible ? D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE : D3D12_DESCRIPTOR_HEAP_FLAG_NONE);
+    Desc.NodeMask       = 0;
 
     return Create(pDevice, &Desc);
 }

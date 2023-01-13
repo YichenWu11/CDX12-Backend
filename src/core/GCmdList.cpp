@@ -1,6 +1,6 @@
 #include <CDX12/GCmdList.h>
 
-#include "DirectXHelpers.h"
+#include <DirectXHelpers.h>
 
 using namespace Chen::CDX12;
 
@@ -30,15 +30,13 @@ void GCmdList::ClearDepthStencilView(D3D12_CPU_DESCRIPTOR_HANDLE DepthStencilVie
 
 void GCmdList::OMSetRenderTarget(
     D3D12_CPU_DESCRIPTOR_HANDLE rendertarget,
-    D3D12_CPU_DESCRIPTOR_HANDLE depthstencil)
-{
+    D3D12_CPU_DESCRIPTOR_HANDLE depthstencil) {
     raw->OMSetRenderTargets(1, &rendertarget, true, &depthstencil);
 }
 
 void GCmdList::DrawIndexed(
     UINT IndexCount,
     UINT StartIndexLocation,
-    INT BaseVertexLocation)
-{
+    INT  BaseVertexLocation) {
     raw->DrawIndexedInstanced(IndexCount, 1, StartIndexLocation, BaseVertexLocation, 0);
 }

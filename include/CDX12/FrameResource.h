@@ -5,7 +5,6 @@
 #include "GCmdList.h"
 #include "Math/MathHelper.h"
 
-
 namespace Chen::CDX12 {
     class FrameResource {
     public:

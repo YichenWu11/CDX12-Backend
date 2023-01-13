@@ -6,12 +6,10 @@ using namespace Chen::CDX12;
 DynamicSuballocMngr::DynamicSuballocMngr(
     GPUDescriptorHeap* ParentGPUHeap,
     uint32_t           DynamicChunkSize,
-    std::string        ManagerName)
-    noexcept :
-    m_ParentGPUHeap   { ParentGPUHeap },
-    m_ManagerName     { std::move(ManagerName) },
-    m_DynamicChunkSize{ DynamicChunkSize }
-{
+    std::string        ManagerName) noexcept :
+    m_ParentGPUHeap{ParentGPUHeap},
+    m_ManagerName{std::move(ManagerName)},
+    m_DynamicChunkSize{DynamicChunkSize} {
     assert(ParentGPUHeap != nullptr);
 }
 
@@ -26,7 +24,7 @@ void DynamicSuballocMngr::ReleaseAllocations() {
     for (auto& Allocation : m_Suballocations)
         m_ParentGPUHeap->Free(std::move(Allocation));
     m_Suballocations.clear();
-    m_CurrDescriptorCount = 0;
+    m_CurrDescriptorCount         = 0;
     m_CurrSuballocationsTotalSize = 0;
 }
 
@@ -35,11 +33,9 @@ DescriptorHeapAllocation DynamicSuballocMngr::Allocate(uint32_t Count) {
     // be called through device context from single thread only
 
     // Check if there are no chunks or the last chunk does not have enough space
-    if (m_Suballocations.empty() ||
-        m_CurrentSuballocationOffset + Count > m_Suballocations.back().GetNumHandles())
-    {
+    if (m_Suballocations.empty() || m_CurrentSuballocationOffset + Count > m_Suballocations.back().GetNumHandles()) {
         // Request a new chunk from the parent GPU descriptor heap
-        auto suballocationSize = (m_DynamicChunkSize > Count) ? m_DynamicChunkSize : Count;
+        auto suballocationSize       = (m_DynamicChunkSize > Count) ? m_DynamicChunkSize : Count;
         auto NewDynamicSubAllocation = m_ParentGPUHeap->AllocateDynamic(suballocationSize);
         if (NewDynamicSubAllocation.IsNull())
             return {};
@@ -61,8 +57,7 @@ DescriptorHeapAllocation DynamicSuballocMngr::Allocate(uint32_t Count) {
         currentSuballocation.GetCpuHandle(m_CurrentSuballocationOffset),
         currentSuballocation.GetGpuHandle(m_CurrentSuballocationOffset),
         Count,
-        static_cast<uint16_t>(managerId)
-    );
+        static_cast<uint16_t>(managerId));
     m_CurrentSuballocationOffset += Count;
     m_CurrDescriptorCount += Count;
     m_PeakDescriptorCount = (m_PeakDescriptorCount > m_CurrDescriptorCount) ? m_PeakDescriptorCount : m_CurrDescriptorCount;

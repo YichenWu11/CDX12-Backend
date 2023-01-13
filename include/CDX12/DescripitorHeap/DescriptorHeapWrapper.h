@@ -8,14 +8,14 @@ namespace Chen::CDX12 {
         DescriptorHeapWrapper() { memset(this, 0, sizeof(DescriptorHeapWrapper)); }
 
         HRESULT Create(
-            ID3D12Device* pDevice,
+            ID3D12Device*                     pDevice,
             const D3D12_DESCRIPTOR_HEAP_DESC* desc);
 
         HRESULT Create(
-            ID3D12Device* pDevice,
+            ID3D12Device*              pDevice,
             D3D12_DESCRIPTOR_HEAP_TYPE Type,
-            UINT NumDescriptors,
-            bool bShaderVisible = false);
+            UINT                       NumDescriptors,
+            bool                       bShaderVisible = false);
 
         void Clear() {
             raw.Reset();
@@ -33,20 +33,19 @@ namespace Chen::CDX12 {
 
         bool Empty() const noexcept { return Size() == 0; }
 
-        operator ID3D12DescriptorHeap* () const noexcept { return raw.Get(); }
+        operator ID3D12DescriptorHeap*() const noexcept { return raw.Get(); }
 
-        D3D12_CPU_DESCRIPTOR_HANDLE hCPU(UINT index) const noexcept
-        { return { hCPUHeapStart.ptr + index * HandleIncrementSize }; }
+        D3D12_CPU_DESCRIPTOR_HANDLE hCPU(UINT index) const noexcept { return {hCPUHeapStart.ptr + index * HandleIncrementSize}; }
 
         D3D12_GPU_DESCRIPTOR_HANDLE hGPU(UINT index) const noexcept {
             assert(Desc.Flags & D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE);
-            return { hGPUHeapStart.ptr + index * HandleIncrementSize };
+            return {hGPUHeapStart.ptr + index * HandleIncrementSize};
         }
 
     private:
-        D3D12_DESCRIPTOR_HEAP_DESC Desc;
+        D3D12_DESCRIPTOR_HEAP_DESC  Desc;
         D3D12_CPU_DESCRIPTOR_HANDLE hCPUHeapStart;
         D3D12_GPU_DESCRIPTOR_HANDLE hGPUHeapStart;
-        UINT HandleIncrementSize;
-    };    
-}
+        UINT                        HandleIncrementSize;
+    };
+} // namespace Chen::CDX12

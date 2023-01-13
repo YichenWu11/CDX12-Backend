@@ -1,7 +1,7 @@
 #pragma once
 
-#include "IDescriptorAllocator.h"
 #include "GPUDescriptorHeap.h"
+#include "IDescriptorAllocator.h"
 
 namespace Chen::CDX12 {
     // The class facilitates allocation of dynamic descriptor handles. It requests a chunk of heap
@@ -14,17 +14,17 @@ namespace Chen::CDX12 {
     //                                        |                       |
     //                                        m_Suballocations[0]     m_Suballocations[1]
     //
-	class DynamicSuballocMngr final : public IDescriptorAllocator {
+    class DynamicSuballocMngr final : public IDescriptorAllocator {
     public:
         DynamicSuballocMngr(
             GPUDescriptorHeap* ParentGPUHeap,
             uint32_t           DynamicChunkSize,
             std::string        ManagerName) noexcept;
 
-        DynamicSuballocMngr            (const DynamicSuballocMngr&) = delete;
-        DynamicSuballocMngr            (DynamicSuballocMngr&&)      = delete;
-        DynamicSuballocMngr& operator= (const DynamicSuballocMngr&) = delete;
-        DynamicSuballocMngr& operator= (DynamicSuballocMngr&&)      = delete;
+        DynamicSuballocMngr(const DynamicSuballocMngr&)            = delete;
+        DynamicSuballocMngr(DynamicSuballocMngr&&)                 = delete;
+        DynamicSuballocMngr& operator=(const DynamicSuballocMngr&) = delete;
+        DynamicSuballocMngr& operator=(DynamicSuballocMngr&&)      = delete;
 
         ~DynamicSuballocMngr();
 
@@ -58,4 +58,4 @@ namespace Chen::CDX12 {
         uint32_t m_CurrSuballocationsTotalSize = 0;
         uint32_t m_PeakSuballocationsTotalSize = 0;
     };
-}
+} // namespace Chen::CDX12

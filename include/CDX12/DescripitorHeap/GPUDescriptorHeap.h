@@ -1,11 +1,12 @@
 #pragma once
 
-#include "IDescriptorAllocator.h"
 #include "DescriptorHeapAllocation.h"
 #include "DescriptorHeapAllocationMngr.h"
+#include "IDescriptorAllocator.h"
+
 
 namespace Chen::CDX12 {
-	// GPU descriptor heap provides storage for shader-visible descriptors
+    // GPU descriptor heap provides storage for shader-visible descriptors
     // The heap contains single D3D12 descriptor heap that is split into two parts.
     // The first part stores static and mutable resource descriptor handles.
     // The second part is intended to provide temporary storage for dynamic resources.
@@ -52,16 +53,14 @@ namespace Chen::CDX12 {
                           D3D12_DESCRIPTOR_HEAP_TYPE  Type,
                           D3D12_DESCRIPTOR_HEAP_FLAGS Flags);
 
-        GPUDescriptorHeap            (const GPUDescriptorHeap&) = delete;
-        GPUDescriptorHeap            (GPUDescriptorHeap&&)      = delete;
-        GPUDescriptorHeap& operator= (const GPUDescriptorHeap&) = delete;
-        GPUDescriptorHeap& operator= (GPUDescriptorHeap&&)      = delete;
+        GPUDescriptorHeap(const GPUDescriptorHeap&)            = delete;
+        GPUDescriptorHeap(GPUDescriptorHeap&&)                 = delete;
+        GPUDescriptorHeap& operator=(const GPUDescriptorHeap&) = delete;
+        GPUDescriptorHeap& operator=(GPUDescriptorHeap&&)      = delete;
 
-        virtual DescriptorHeapAllocation Allocate(uint32_t count) override final
-        { return m_HeapAllocationManager.Allocate(count); }
+        virtual DescriptorHeapAllocation Allocate(uint32_t count) override final { return m_HeapAllocationManager.Allocate(count); }
 
-        DescriptorHeapAllocation AllocateDynamic(uint32_t count)
-        { return m_DynamicAllocationsManager.Allocate(count); }
+        DescriptorHeapAllocation AllocateDynamic(uint32_t count) { return m_DynamicAllocationsManager.Allocate(count); }
 
         virtual void     Free(DescriptorHeapAllocation&&) override final;
         virtual uint32_t GetDescriptorSize() const override final { return m_DescriptorSize; }
@@ -83,11 +82,11 @@ namespace Chen::CDX12 {
         static constexpr size_t DynamicHeapAllocatonManagerID = 1;
 
         // Allocation manager for static/mutable part
-        std::mutex m_AllocMutex;
+        std::mutex                   m_AllocMutex;
         DescriptorHeapAllocationMngr m_HeapAllocationManager;
 
         // Allocation manager for dynamic part
-        std::mutex m_DynAllocMutex;
+        std::mutex                   m_DynAllocMutex;
         DescriptorHeapAllocationMngr m_DynamicAllocationsManager;
-    };    
-}
+    };
+} // namespace Chen::CDX12

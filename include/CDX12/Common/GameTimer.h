@@ -1,13 +1,12 @@
 #pragma once
 
 namespace Chen::CDX12 {
-    class GameTimer
-    {
+    class GameTimer {
     public:
         GameTimer();
 
-        float TotalTime()const; // in seconds
-        float DeltaTime()const; // in seconds
+        float TotalTime() const; // in seconds
+        float DeltaTime() const; // in seconds
 
         void Reset(); // Call before message loop.
         void Start(); // Call when unpaused.
@@ -26,4 +25,4 @@ namespace Chen::CDX12 {
 
         bool mStopped;
     };
-}
+} // namespace Chen::CDX12
