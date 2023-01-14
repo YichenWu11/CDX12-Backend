@@ -5,6 +5,8 @@
 using Microsoft::WRL::ComPtr;
 
 namespace Chen::CDX12 {
+    class FrameResource;
+
     class Resource {
     protected:
         ID3D12Device* device;
@@ -21,5 +23,6 @@ namespace Chen::CDX12 {
         virtual ~Resource() = default;
         virtual ID3D12Resource*       GetResource() const { return nullptr; }
         virtual D3D12_RESOURCE_STATES GetInitState() const { return D3D12_RESOURCE_STATE_COMMON; }
+        virtual void                  DelayDispose(FrameResource* frameRes) const {}
     };
 } // namespace Chen::CDX12

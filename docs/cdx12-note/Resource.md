@@ -1,5 +1,7 @@
 # Resource 
 
+## Resource 封装
+
 ***参考自麦老师的 `dx12-tutorial`***
 
 ![resource](./images/resource.png)
@@ -43,3 +45,7 @@ vertex_sample.position.Get(vertex_data_ptr) = {.......};
 vertex_sample.normal.Get(vertex_data_ptr) = {.......};
 vertex_sample.tex_coord.Get(vertex_data_ptr) = {.......};
 ```
+
+## ResourceState
+
+`ResourceState` 最大的意义在于标记一个同步点, 使得相互依赖的GPU任务保持串行.

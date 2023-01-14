@@ -1,3 +1,4 @@
+#include <CDX12/FrameResource.h>
 #include <CDX12/Resource/DefaultBuffer.h>
 
 namespace Chen::CDX12 {
@@ -20,5 +21,9 @@ namespace Chen::CDX12 {
     }
 
     DefaultBuffer::~DefaultBuffer() {
+    }
+
+    void DefaultBuffer::DelayDispose(FrameResource* frameRes) const {
+        frameRes->AddDelayDisposeResource(resource);
     }
 } // namespace Chen::CDX12

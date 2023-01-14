@@ -466,10 +466,6 @@ void DX12App::FlushCommandQueue() {
     }
 }
 
-ID3D12CommandAllocator* DX12App::GetCurFrameCommandAllocator() noexcept {
-    return mFrameResourceMngr->GetCurrentFrameResource()->GetAllocator();
-}
-
 ID3D12Resource* DX12App::CurrentBackBuffer() const {
     return mSwapChainBuffer[mCurrBackBuffer].Get();
 }

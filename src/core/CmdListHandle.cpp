@@ -2,7 +2,7 @@
 
 using namespace Chen::CDX12;
 
-CmdListHandle::CmdListHandle(CmdListHandle&& v) :
+CmdListHandle::CmdListHandle(CmdListHandle&& v) noexcept :
     cmdList(v.cmdList) {
     v.cmdList = nullptr;
 }

@@ -1,12 +1,13 @@
 #pragma once
 
-#include "./Geometry/MeshMngr.h"
-#include "./Material/MaterialMngr.h"
-#include "./Material/TextureMngr.h"
-#include "./Shader/PSOManager.h"
-#include "./Shader/ShaderMngr.h"
+#include <CDX12/DXUtil.h>
 
 namespace Chen::CDX12 {
+    class MaterialMngr;
+    class TextureMngr;
+    class ShaderMngr;
+    class PSOManager;
+
     class RenderResourceMngr {
     public:
         static RenderResourceMngr& GetInstance() noexcept {

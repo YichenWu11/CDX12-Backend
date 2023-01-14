@@ -3,7 +3,6 @@
 #include "DescriptorHeapAllocationMngr.h"
 #include "IDescriptorAllocator.h"
 
-
 #include <unordered_set>
 
 namespace Chen::CDX12 {

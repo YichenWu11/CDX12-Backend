@@ -23,6 +23,10 @@ void FrameResourceMngr::BeginFrame() {
     GetCurrentFrameResource()->BeginFrame(eventHandle);
 }
 
+void FrameResourceMngr::Execute(ID3D12CommandQueue* queue) {
+    GetCurrentFrameResource()->Execute(queue);
+}
+
 void FrameResourceMngr::EndFrame(ID3D12CommandQueue* cmdQueue) {
     GetCurrentFrameResource()->Signal(cmdQueue, ++cpuFence);
 }

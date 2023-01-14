@@ -1,8 +1,6 @@
 #pragma once
 
-#include "../DXUtil.h"
-#include "../Resource/Resource.h"
-
+#include <CDX12/Resource/Resource.h>
 
 namespace Chen::CDX12 {
     enum class TextureDimension : uint8_t {
@@ -14,23 +12,55 @@ namespace Chen::CDX12 {
         Tex2DArray,
     };
 
-    class Texture {
+    class FrameResource;
+
+    class Texture final : public Resource {
     public:
-        // FIXME: Resource inheritance error
-        Texture(TextureDimension _dimension = TextureDimension::Tex2D) :
-            dimension(_dimension) {}
+        enum class TextureUsage : uint {
+            None            = 0,
+            RenderTarget    = 0x1,
+            DepthStencil    = 0x2,
+            UnorderedAccess = 0x4,
+            GenericColor    = (0x4 | 0x1) // Both render target and unordered access
+        };
 
-        D3D12_SHADER_RESOURCE_VIEW_DESC GetTexSrvDesc();
-        ID3D12Resource*                 GetResource() const { return Resource.Get(); }
-        D3D12_RESOURCE_STATES           GetInitState() const { return D3D12_RESOURCE_STATE_COMMON; }
-        ID3D12Resource*                 GetUploadHeap() const { return UploadHeap.Get(); }
-
-        std::string            Name; // Unique Texture name for lookup.
-        std::wstring           Filename;
-        ComPtr<ID3D12Resource> Resource   = nullptr;
-        ComPtr<ID3D12Resource> UploadHeap = nullptr;
+        static constexpr float   CLEAR_COLOR[4] = {0, 0, 0, 0};
+        static constexpr float   CLEAR_DEPTH    = 1;
+        static constexpr uint8_t CLEAR_STENCIL  = 0;
 
     private:
-        TextureDimension dimension;
+        ComPtr<ID3D12Resource> resource;
+        D3D12_RESOURCE_STATES  initState;
+        TextureDimension       dimension;
+        TextureUsage           usage;
+
+    public:
+        Texture(
+            ID3D12Device*         device,
+            uint                  width,
+            uint                  height,
+            DXGI_FORMAT           format,
+            TextureDimension      dimension,
+            uint                  depth,
+            uint                  mip,
+            TextureUsage          usage,
+            D3D12_RESOURCE_STATES resourceState);
+
+        Texture(
+            ID3D12Device*    device,
+            IDXGISwapChain3* swapchain,
+            uint             frame);
+
+        ~Texture();
+
+        ID3D12Resource* GetResource() const override {
+            return resource.Get();
+        }
+        D3D12_RESOURCE_STATES GetInitState() const override {
+            return initState;
+        }
+        D3D12_SHADER_RESOURCE_VIEW_DESC  GetColorSrvDesc(uint mipOffset) const;
+        D3D12_UNORDERED_ACCESS_VIEW_DESC GetColorUavDesc(uint targetMipLevel) const;
+        void                             DelayDispose(FrameResource* frameRes) const override;
     };
 } // namespace Chen::CDX12

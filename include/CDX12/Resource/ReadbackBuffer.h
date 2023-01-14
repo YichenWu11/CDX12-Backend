@@ -25,5 +25,6 @@ namespace Chen::CDX12 {
         }
         ReadbackBuffer(ReadbackBuffer&&)      = default;
         ReadbackBuffer(ReadbackBuffer const&) = delete;
+        void DelayDispose(FrameResource* frameRes) const override;
     };
 } // namespace Chen::CDX12

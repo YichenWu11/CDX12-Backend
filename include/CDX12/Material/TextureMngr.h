@@ -2,8 +2,8 @@
 
 #include <ResourceUploadBatch.h>
 
-#include "../DescripitorHeap/DescriptorHeapAllocation.h"
-#include "Texture.h"
+#include <CDX12/DescripitorHeap/DescriptorHeapAllocation.h>
+#include <CDX12/Material/Texture.h>
 
 namespace Chen::CDX12 {
     class TextureMngr {
@@ -16,11 +16,11 @@ namespace Chen::CDX12 {
         TextureMngr(const TextureMngr&)            = delete;
         TextureMngr& operator=(const TextureMngr&) = delete;
 
-        size_t
-        CreateTextureFromFile(ID3D12Device* device, ID3D12CommandQueue* cmdQueue,
-                              const std::wstring& path, const std::string& name,
-                              TexFileFormat    format,
-                              TextureDimension dimension = TextureDimension::Tex2D);
+        // TODO: Impl the  `createTexture`
+        // size_t CreateTextureFromFile(ID3D12Device* device, ID3D12CommandQueue* cmdQueue,
+        //                              const std::wstring& path, const std::string& name,
+        //                              TexFileFormat    format,
+        //                              TextureDimension dimension = TextureDimension::Tex2D);
 
         size_t GetTextureIndex(const std::string& name) const {
             return (name2index.find(name) != name2index.end()) ? name2index.at(name) : InvalidIndex;

@@ -1,7 +1,5 @@
 #pragma once
 
-#include <CDX12/DXUtil.h>
-#include <CDX12/Metalib.h>
 #include <CDX12/Resource/Buffer.h>
 
 namespace Chen::CDX12 {
@@ -27,6 +25,7 @@ namespace Chen::CDX12 {
         D3D12_RESOURCE_STATES GetInitState() const override {
             return D3D12_RESOURCE_STATE_GENERIC_READ;
         }
+        void DelayDispose(FrameResource* frameRes) const override;
     };
 
     // template <typename T>

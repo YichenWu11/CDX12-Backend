@@ -15,6 +15,7 @@ namespace Chen::CDX12 {
 
         void BeginFrame();
         void EndFrame(ID3D12CommandQueue*);
+        void Execute(ID3D12CommandQueue* queue);
 
     private:
         HANDLE                                      eventHandle;

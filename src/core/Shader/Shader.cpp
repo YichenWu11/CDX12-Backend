@@ -1,6 +1,6 @@
 #include <CDX12/GeneralDesc.h>
+#include <CDX12/Resource/Buffer.h>
 #include <CDX12/Shader/Shader.h>
-
 
 using namespace Chen::CDX12;
 
@@ -95,24 +95,24 @@ Shader::Shader(
 bool Shader::SetResource(
     std::string_view           propertyName,
     ID3D12GraphicsCommandList* cmdList,
-    D3D12_GPU_VIRTUAL_ADDRESS  address) const {
+    BufferView                 buffer) const {
     auto var = GetProperty(propertyName);
     if (!var) return false;
     switch (var->type) {
         case ShaderVariableType::ConstantBuffer: {
             cmdList->SetGraphicsRootConstantBufferView(
                 var->rootSigPos,
-                address);
+                buffer.buffer->GetAddress() + buffer.offset);
         } break;
         case ShaderVariableType::StructuredBuffer: {
             cmdList->SetGraphicsRootShaderResourceView(
                 var->rootSigPos,
-                address);
+                buffer.buffer->GetAddress() + buffer.offset);
         } break;
         case ShaderVariableType::RWStructuredBuffer: {
             cmdList->SetGraphicsRootUnorderedAccessView(
                 var->rootSigPos,
-                address);
+                buffer.buffer->GetAddress() + buffer.offset);
         } break;
         default:
             return false;
@@ -121,9 +121,9 @@ bool Shader::SetResource(
 }
 
 bool Shader::SetResource(
-    std::string_view            propertyName,
-    ID3D12GraphicsCommandList*  cmdList,
-    D3D12_GPU_DESCRIPTOR_HANDLE hGpu) const {
+    std::string_view           propertyName,
+    ID3D12GraphicsCommandList* cmdList,
+    DescriptorHeapAllocView    view) const {
     auto var = GetProperty(propertyName);
     if (!var) return false;
     switch (var->type) {
@@ -131,7 +131,7 @@ bool Shader::SetResource(
         case ShaderVariableType::SRVDescriptorHeap: {
             cmdList->SetGraphicsRootDescriptorTable(
                 var->rootSigPos,
-                hGpu);
+                view.heap->GetGpuHandle(view.index));
         } break;
         default:
             return false;

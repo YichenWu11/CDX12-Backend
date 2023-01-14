@@ -1,3 +1,4 @@
+#include <CDX12/FrameResource.h>
 #include <CDX12/Resource/ReadbackBuffer.h>
 
 namespace Chen::CDX12 {
@@ -30,5 +31,9 @@ namespace Chen::CDX12 {
         ThrowIfFailed(resource->Map(0, &range, (void**)(&mapPtr)));
         memcpy(data.data(), reinterpret_cast<uint8_t const*>(mapPtr) + offset, range.End - range.Begin);
         resource->Unmap(0, nullptr);
+    }
+
+    void ReadbackBuffer::DelayDispose(FrameResource* frameRes) const {
+        frameRes->AddDelayDisposeResource(resource);
     }
 } // namespace Chen::CDX12

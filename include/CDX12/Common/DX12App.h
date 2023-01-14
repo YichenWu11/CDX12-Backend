@@ -94,7 +94,7 @@ namespace Chen::CDX12 {
         Device                                mDevice;
         Microsoft::WRL::ComPtr<IDXGIFactory4> mdxgiFactory;
 
-        static const int                       SwapChainBufferCount = 2;
+        static const int                       SwapChainBufferCount = 3; // triple buffering
         int                                    mCurrBackBuffer      = 0;
         Microsoft::WRL::ComPtr<IDXGISwapChain> mSwapChain;
         Microsoft::WRL::ComPtr<ID3D12Resource> mSwapChainBuffer[SwapChainBufferCount];
@@ -121,7 +121,7 @@ namespace Chen::CDX12 {
 
         POINT mLastMousePos;
 
-        std::wstring    mMainWndCaption     = L"CDX12App";
+        std::wstring    mMainWndCaption     = L"DX12App";
         D3D_DRIVER_TYPE md3dDriverType      = D3D_DRIVER_TYPE_HARDWARE;
         DXGI_FORMAT     mBackBufferFormat   = DXGI_FORMAT_R8G8B8A8_UNORM;
         DXGI_FORMAT     mDepthStencilFormat = DXGI_FORMAT_D24_UNORM_S8_UINT;

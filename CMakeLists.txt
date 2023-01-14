@@ -11,7 +11,7 @@ if(MSVC)
     add_definitions(-DNOMINMAX -D_USE_MATH_DEFINES)
 endif()
 
-add_definitions(-DUNICODE -D_UNICODE)
+add_definitions(-DUNICODE -D_UNICODE -DNOMINMAX)
 
 project(CDX12)
 

@@ -1,20 +1,25 @@
 #pragma once
 
-#include "CmdListHandle.h"
-#include "DXUtil.h"
-#include "GCmdList.h"
-#include "Math/MathHelper.h"
+#include <functional>
+
+#include <CDX12/CmdListHandle.h>
+#include <CDX12/DXUtil.h>
+#include <CDX12/GCmdList.h>
+#include <CDX12/Geometry/Mesh.h>
+#include <CDX12/Material/Texture.h>
+#include <CDX12/Math/MathHelper.h>
+#include <CDX12/Resource/DefaultBuffer.h>
+#include <CDX12/Resource/ReadbackBuffer.h>
+#include <CDX12/Resource/UploadBuffer.h>
+#include <CDX12/Shader/BasicShader.h>
+#include <CDX12/Shader/PSOManager.h>
+#include <CDX12/Util/BindProperty.h>
+#include <CDX12/Util/StackAllocator.h>
 
 namespace Chen::CDX12 {
     class FrameResource {
     public:
-    public:
-        FrameResource(UINT64 cpuFence, ID3D12Fence* gpuFence, ID3D12Device* device) :
-            cpuFence{cpuFence}, gpuFence{gpuFence} {
-            ThrowIfFailed(device->CreateCommandAllocator(
-                D3D12_COMMAND_LIST_TYPE_DIRECT,
-                IID_PPV_ARGS(CmdListAlloc.GetAddressOf())));
-        }
+        FrameResource(UINT64 cpuFence, ID3D12Fence* gpuFence, ID3D12Device* device);
 
         bool HaveResource(std::string_view name) const { return resourceMap.find(name) != resourceMap.end(); }
 
@@ -28,10 +33,59 @@ namespace Chen::CDX12 {
         template <typename T>
         const T& GetResource(std::string_view name) const;
 
-        ID3D12CommandAllocator* GetAllocator() { return CmdListAlloc.Get(); }
+        GCmdList GetCmdList() { return cmdList; }
+
+        CmdListHandle Command();
+        void          AddDelayDisposeResource(ComPtr<ID3D12Resource> const& ptr);
+
+        void Execute(ID3D12CommandQueue* queue);
+
+        void       Upload(BufferView const& buffer, void const* src);
+        void       Download(BufferView const& buffer, void* dst);
+        BufferView AllocateConstBuffer(std::span<uint8_t const> data);
+        void       CopyBuffer(
+                  Buffer const* src,
+                  Buffer const* dst,
+                  uint64        srcOffset,
+                  uint64        dstOffset,
+                  uint64        byteSize);
+        void SetRenderTarget(
+            Texture const*                       tex,
+            CD3DX12_CPU_DESCRIPTOR_HANDLE const* rtvHandle,
+            CD3DX12_CPU_DESCRIPTOR_HANDLE const* dsvHandle = nullptr);
+        void ClearRTV(CD3DX12_CPU_DESCRIPTOR_HANDLE const& rtv);
+        void ClearDSV(CD3DX12_CPU_DESCRIPTOR_HANDLE const& dsv);
+
+        void DrawMesh(
+            BasicShader const*      shader,
+            PSOManager*             psoManager,
+            Mesh*                   mesh,
+            DXGI_FORMAT             colorFormat,
+            DXGI_FORMAT             depthFormat,
+            std::span<BindProperty> properties);
 
     private:
         friend class FrameResourceMngr;
+
+        static constexpr size_t TEMP_SIZE = 1024ull * 1024ull;
+
+        template <typename T>
+        class Visitor : public IStackAllocVisitor {
+        public:
+            FrameResource* self;
+            uint64         Allocate(uint64 size) override;
+            void           DeAllocate(uint64 handle) override;
+        };
+        Visitor<UploadBuffer>                 tempUBVisitor;
+        Visitor<DefaultBuffer>                tempVisitor;
+        Visitor<ReadbackBuffer>               tempRBVisitor;
+        StackAllocator                        ubAlloc;
+        StackAllocator                        rbAlloc;
+        StackAllocator                        dbAlloc;
+        ID3D12Device*                         device;
+        std::vector<D3D12_VERTEX_BUFFER_VIEW> vertexBufferView;
+
+        BufferView GetTempBuffer(size_t size, size_t align, StackAllocator& alloc);
 
         // cpu at frame [cpuFence] use the resources
         // when the frame complete (GPU instructions complete), gpuFence <- cpuFence
@@ -42,11 +96,18 @@ namespace Chen::CDX12 {
         // run delay updator and unregister
         void BeginFrame(HANDLE sharedEventHandle);
 
-        Microsoft::WRL::ComPtr<ID3D12CommandAllocator> CmdListAlloc;
+        bool populated = false;
 
-        UINT64                                       cpuFence;
-        ID3D12Fence*                                 gpuFence;
+        Microsoft::WRL::ComPtr<ID3D12CommandAllocator> cmdAllocator;
+        GCmdList                                       cmdList;
+
+        UINT64       cpuFence;
+        ID3D12Fence* gpuFence;
+
         std::map<std::string, std::any, std::less<>> resourceMap;
+        std::vector<ComPtr<ID3D12Resource>>          delayDisposeResources;
+
+        std::vector<std::function<void()>> afterSyncEvents;
     };
 } // namespace Chen::CDX12
 

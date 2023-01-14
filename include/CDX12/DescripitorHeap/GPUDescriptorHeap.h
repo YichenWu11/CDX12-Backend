@@ -4,7 +4,6 @@
 #include "DescriptorHeapAllocationMngr.h"
 #include "IDescriptorAllocator.h"
 
-
 namespace Chen::CDX12 {
     // GPU descriptor heap provides storage for shader-visible descriptors
     // The heap contains single D3D12 descriptor heap that is split into two parts.

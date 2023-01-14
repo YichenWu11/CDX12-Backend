@@ -4,11 +4,9 @@
 #include "DescriptorHeapAllocation.h"
 #include "IDescriptorAllocator.h"
 
-
 #include <atlbase.h>
 #include <d3d12.h>
 #include <mutex>
-
 
 namespace Chen::CDX12 {
     /*

@@ -1,9 +1,5 @@
 #pragma once
 
-/*
-    DXUtil::CreateDefaultBuffer(...)
-*/
-
 #include <CDX12/Resource/Buffer.h>
 
 namespace Chen::CDX12 {
@@ -31,5 +27,6 @@ namespace Chen::CDX12 {
 
         DefaultBuffer(DefaultBuffer&&)      = default;
         DefaultBuffer(DefaultBuffer const&) = delete;
+        void DelayDispose(FrameResource* frameRes) const override;
     };
 } // namespace Chen::CDX12
