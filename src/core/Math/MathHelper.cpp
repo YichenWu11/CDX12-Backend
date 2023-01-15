@@ -2,7 +2,6 @@
 #include <cmath>
 #include <float.h>
 
-
 using namespace DirectX;
 using namespace Chen::CDX12::Math;
 
@@ -31,8 +30,7 @@ float MathHelper::AngleFromXY(float x, float y) {
 
 // 在单位球上随机采样
 XMVECTOR MathHelper::RandUnitVec3() {
-    XMVECTOR One  = XMVectorSet(1.0f, 1.0f, 1.0f, 1.0f);
-    XMVECTOR Zero = XMVectorZero();
+    XMVECTOR One = XMVectorSet(1.0f, 1.0f, 1.0f, 1.0f);
 
     // Keep trying until we get a point on/in the hemisphere.
     while (true) {

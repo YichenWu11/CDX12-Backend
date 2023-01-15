@@ -6,8 +6,8 @@ namespace Chen::CDX12 {
 
     class DefaultBuffer final : public Buffer {
     private:
-        uint64_t               byteSize;
         D3D12_RESOURCE_STATES  initState;
+        uint64_t               byteSize;
         ComPtr<ID3D12Resource> resource;
 
     public:

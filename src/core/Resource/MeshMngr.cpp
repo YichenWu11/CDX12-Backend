@@ -51,9 +51,9 @@ namespace Chen::CDX12 {
             // TODO: Log
             std::cout << reader.Warning() << std::endl;
 
-        auto& attrib    = reader.GetAttrib();
-        auto& shapes    = reader.GetShapes();
-        auto& materials = reader.GetMaterials();
+        auto& attrib = reader.GetAttrib();
+        auto& shapes = reader.GetShapes();
+        // auto& materials = reader.GetMaterials();
 
         // TODO: optimize indexed
 

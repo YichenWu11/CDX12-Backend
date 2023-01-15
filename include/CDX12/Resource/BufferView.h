@@ -12,8 +12,8 @@ namespace Chen::CDX12 {
 
     struct BufferView {
         Buffer const* buffer   = nullptr;
-        uint64_t      offset   = 0;
         uint64_t      byteSize = 0;
+        uint64_t      offset   = 0;
 
         BufferView() {}
         BufferView(Buffer const* buffer);

@@ -29,10 +29,10 @@ namespace Chen::CDX12 {
         static constexpr uint8_t CLEAR_STENCIL  = 0;
 
     private:
-        ComPtr<ID3D12Resource> resource;
         D3D12_RESOURCE_STATES  initState;
-        TextureDimension       dimension;
         TextureUsage           usage;
+        TextureDimension       dimension;
+        ComPtr<ID3D12Resource> resource;
 
     public:
         Texture(

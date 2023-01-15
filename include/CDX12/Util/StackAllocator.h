@@ -9,8 +9,8 @@ namespace Chen::CDX12 {
     };
 
     class StackAllocator {
-        IStackAllocVisitor* visitor;
         uint64              capacity;
+        IStackAllocVisitor* visitor;
         struct Buffer {
             uint64 handle;
             uint64 fullSize;
