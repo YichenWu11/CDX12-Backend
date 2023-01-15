@@ -20,10 +20,15 @@
 */
 
 #pragma once
-#include "IDescriptorAllocator.h"
+
 #include <d3d12.h>
 
+#include "IDescriptorAllocator.h"
+#include <CDX12/Resource/Resource.h>
+
 namespace Chen::CDX12 {
+    class Resource;
+
     // contains the first CPU handle in CPU virtual address space, and,
     // if the heap is shader-visible, the first GPU handle in GPU virtual address space
 
@@ -36,7 +41,8 @@ namespace Chen::CDX12 {
     //                  m_FirstGpuHandle
     //
 
-    class DescriptorHeapAllocation {
+    // TODO: DescriptorHeapAllocation is derived form Resource, but here the `device` of base class is `nullptr`
+    class DescriptorHeapAllocation : public Resource {
     public:
         // Creates null allocation
         DescriptorHeapAllocation() = default;
@@ -51,10 +57,10 @@ namespace Chen::CDX12 {
             uint16_t                    AllocationManagerId);
 
         // Move constructor
-        DescriptorHeapAllocation(DescriptorHeapAllocation&& Allocation);
+        DescriptorHeapAllocation(DescriptorHeapAllocation&& Allocation) noexcept;
 
         // Move assignment
-        DescriptorHeapAllocation& operator=(DescriptorHeapAllocation&& Allocation);
+        DescriptorHeapAllocation& operator=(DescriptorHeapAllocation&& Allocation) noexcept;
 
         // copy/copy assignment is not allowed.
         DescriptorHeapAllocation(const DescriptorHeapAllocation&)            = delete;

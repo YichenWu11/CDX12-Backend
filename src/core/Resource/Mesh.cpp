@@ -1,4 +1,4 @@
-#include <CDX12/Geometry/Mesh.h>
+#include <CDX12/Resource/Mesh.h>
 
 namespace Chen::CDX12 {
     Mesh::Mesh(

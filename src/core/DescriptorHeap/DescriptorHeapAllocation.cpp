@@ -22,7 +22,7 @@ DescriptorHeapAllocation::DescriptorHeapAllocation(
     m_DescriptorSize    = static_cast<uint16_t>(DescriptorSize);
 }
 
-DescriptorHeapAllocation::DescriptorHeapAllocation(DescriptorHeapAllocation&& Allocation) :
+DescriptorHeapAllocation::DescriptorHeapAllocation(DescriptorHeapAllocation&& Allocation) noexcept :
     m_FirstCpuHandle{std::move(Allocation.m_FirstCpuHandle)},
     m_FirstGpuHandle{std::move(Allocation.m_FirstGpuHandle)},
     m_pAllocator{std::move(Allocation.m_pAllocator)},
@@ -33,7 +33,7 @@ DescriptorHeapAllocation::DescriptorHeapAllocation(DescriptorHeapAllocation&& Al
     Allocation.Reset();
 }
 
-DescriptorHeapAllocation& DescriptorHeapAllocation::operator=(DescriptorHeapAllocation&& Allocation) {
+DescriptorHeapAllocation& DescriptorHeapAllocation::operator=(DescriptorHeapAllocation&& Allocation) noexcept {
     m_FirstCpuHandle      = std::move(Allocation.m_FirstCpuHandle);
     m_FirstGpuHandle      = std::move(Allocation.m_FirstGpuHandle);
     m_pAllocator          = std::move(Allocation.m_pAllocator);

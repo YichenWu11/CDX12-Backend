@@ -1,6 +1,6 @@
 #pragma once
 
-#include "FrameResource.h"
+#include <CDX12/FrameResource.h>
 
 namespace Chen::CDX12 {
     class FrameResourceMngr {
@@ -9,6 +9,8 @@ namespace Chen::CDX12 {
         ~FrameResourceMngr();
         size_t                                             GetNumFrame() const noexcept { return frameResources.size(); }
         FrameResource*                                     GetCurrentFrameResource() noexcept;
+        FrameResource*                                     GetLastFrameResource() noexcept;
+        FrameResource*                                     GetNextFrameResource() noexcept;
         const std::vector<std::unique_ptr<FrameResource>>& GetFrameResources() const noexcept { return frameResources; }
         size_t                                             GetCurrentCpuFence() const noexcept { return cpuFence; };
         size_t                                             GetCurrentIndex() const noexcept { return (cpuFence % frameResources.size()); }
@@ -16,6 +18,8 @@ namespace Chen::CDX12 {
         void BeginFrame();
         void EndFrame(ID3D12CommandQueue*);
         void Execute(ID3D12CommandQueue* queue);
+
+        void CleanUp();
 
     private:
         HANDLE                                      eventHandle;

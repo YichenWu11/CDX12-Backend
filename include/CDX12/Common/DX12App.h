@@ -1,26 +1,21 @@
 #pragma once
 
-// FIXME: Error --> "No Target Architecture"
-//#include <winnt.h>
-//#if defined(DEBUG) || defined(_DEBUG)
-//#define _CRTDBG_MAP_ALLOC
-//#include <crtdbg.h>
-//#endif
+#include <CDX12/Common/Timer.h>
 
-#include "GameTimer.h"
+#include <CDX12/DescripitorHeap/CPUDescriptorHeap.h>
+#include <CDX12/DescripitorHeap/DescriptorHeapWrapper.h>
+#include <CDX12/DescripitorHeap/GPUDescriptorHeap.h>
 
-#include "../DescripitorHeap/CPUDescriptorHeap.h"
-#include "../DescripitorHeap/DescriptorHeapWrapper.h"
-#include "../DescripitorHeap/GPUDescriptorHeap.h"
-
-#include "../CmdQueue.h"
-#include "../DXUtil.h"
-#include "../DescriptorHeapMngr.h"
-#include "../Device.h"
-#include "../FrameResourceMngr.h"
-#include "../GeneralDesc.h"
-#include "../Metalib.h"
-#include "../RenderResourceMngr.h"
+#include <CDX12/CmdQueue.h>
+#include <CDX12/DXUtil.h>
+#include <CDX12/DescriptorHeapMngr.h>
+#include <CDX12/Device.h>
+#include <CDX12/FrameResourceMngr.h>
+#include <CDX12/GeneralDesc.h>
+#include <CDX12/Material/Texture.h>
+#include <CDX12/Metalib.h>
+#include <CDX12/RenderResourceMngr.h>
+#include <CDX12/Resource/ResourceStateTracker.h>
 
 namespace Chen::CDX12 {
     class DX12App {
@@ -45,16 +40,17 @@ namespace Chen::CDX12 {
 
         virtual int Run();
 
-        virtual bool            Initialize();
-        virtual LRESULT         MsgProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
-        ID3D12CommandAllocator* GetCurFrameCommandAllocator() noexcept;
-        void                    FlushCommandQueue();
+        virtual bool    Initialize();
+        virtual LRESULT MsgProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
+        void            FlushCommandQueue();
+
+        void SetCustomWindowText(LPCWSTR text);
 
     protected:
         virtual void CreateRtvAndDsvDescriptorHeaps();
+
         virtual void OnResize();
-        virtual void LogicTick(const GameTimer& gt)  = 0;
-        virtual void RenderTick(const GameTimer& gt) = 0;
+        virtual void Tick(const Timer& gt) = 0;
 
         // Convenience overrides for handling mouse input.
         virtual void OnMouseDown(WPARAM btnState, int x, int y) {}
@@ -80,7 +76,7 @@ namespace Chen::CDX12 {
     protected:
         static DX12App* mApp;
 
-        int gNumFrameResource = 3; // 3 frameResources
+        int m_frame_count = 3; // 3 frameResources
 
         HINSTANCE mhAppInst        = nullptr; // application instance handle
         HWND      mhMainWnd        = nullptr; // main window handle
@@ -90,43 +86,50 @@ namespace Chen::CDX12 {
         bool      mResizing        = false;   // are the resize bars being dragged?
         bool      mFullscreenState = false;
 
-        GameTimer                             mTimer;
-        Device                                mDevice;
-        Microsoft::WRL::ComPtr<IDXGIFactory4> mdxgiFactory;
+        Timer                                 m_timer;
+        Device                                m_device;
+        Microsoft::WRL::ComPtr<IDXGIFactory4> m_dxgiFactory;
 
-        static const int                       SwapChainBufferCount = 3; // triple buffering
-        int                                    mCurrBackBuffer      = 0;
-        Microsoft::WRL::ComPtr<IDXGISwapChain> mSwapChain;
-        Microsoft::WRL::ComPtr<ID3D12Resource> mSwapChainBuffer[SwapChainBufferCount];
-        Microsoft::WRL::ComPtr<ID3D12Resource> mDepthStencilBuffer;
-        UINT64                                 mCurrentFence = 0;
-        Microsoft::WRL::ComPtr<ID3D12Fence>    mFence;
+        static const int                        s_swapchain_buffer_count = 3; // triple buffering
+        int                                     m_curr_back_buffer       = 0;
+        Microsoft::WRL::ComPtr<IDXGISwapChain3> m_swapchain;
 
-        CmdQueue                                       mCmdQueue;
-        GCmdList                                       mCmdList;
-        Microsoft::WRL::ComPtr<ID3D12CommandAllocator> mDirectCmdListAlloc;
+        std::unique_ptr<Texture> m_swapchain_buffer[s_swapchain_buffer_count];
+        std::unique_ptr<Texture> m_depthstencil_buffer[s_swapchain_buffer_count];
 
-        std::unique_ptr<FrameResourceMngr> mFrameResourceMngr;
+        UINT64                              m_current_fence = 0;
+        Microsoft::WRL::ComPtr<ID3D12Fence> m_fence;
+
+        CmdQueue                                       m_cmdqueue;
+        GCmdList                                       m_cmdlist;
+        Microsoft::WRL::ComPtr<ID3D12CommandAllocator> m_direct_cmdlist_alloc;
+
+        std::unique_ptr<FrameResourceMngr>  m_frameresource_mngr;
+        std::unique_ptr<RenderResourceMngr> m_renderresource_mngr;
+
+        ResourceStateTracker m_state_tracker;
 
         // DescriptorHeapMngr::GetInstance();  // this is the DescriptorHeap Manager For the App;
         // RenderResourceMngr::GetInstance();
 
-        DescriptorHeapAllocation rtvCpuDH;
-        DescriptorHeapAllocation dsvCpuDH;
-        DescriptorHeapAllocation csuCpuDH;
-        DescriptorHeapAllocation csuGpuDH;
+        DescriptorHeapAllocation m_rtvCpuDH;
+        DescriptorHeapAllocation m_dsvCpuDH;
+        DescriptorHeapAllocation m_csuCpuDH;
+        DescriptorHeapAllocation m_csuGpuDH;
 
-        D3D12_VIEWPORT mScreenViewport;
-        D3D12_RECT     mScissorRect;
+        D3D12_VIEWPORT m_screen_viewport;
+        D3D12_RECT     m_scissorRect;
 
-        POINT mLastMousePos;
+        POINT m_lastmouse_pos;
 
-        std::wstring    mMainWndCaption     = L"DX12App";
-        D3D_DRIVER_TYPE md3dDriverType      = D3D_DRIVER_TYPE_HARDWARE;
-        DXGI_FORMAT     mBackBufferFormat   = DXGI_FORMAT_R8G8B8A8_UNORM;
-        DXGI_FORMAT     mDepthStencilFormat = DXGI_FORMAT_D24_UNORM_S8_UINT;
-        int             mClientWidth        = 1000;
-        int             mClientHeight       = 800;
+        std::wstring    m_title        = L"DX12App";
+        D3D_DRIVER_TYPE md3dDriverType = D3D_DRIVER_TYPE_HARDWARE;
+
+        DXGI_FORMAT m_backbuffer_format   = DXGI_FORMAT_R8G8B8A8_UNORM;
+        DXGI_FORMAT m_depthstencil_format = DXGI_FORMAT_D24_UNORM_S8_UINT;
+
+        int m_client_width  = 1000;
+        int m_client_height = 800;
 
         // Initial Total Descriptor_Num
         uint32_t numCpuRTV         = 168;

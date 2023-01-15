@@ -1,9 +1,9 @@
 #pragma once
 
 namespace Chen::CDX12 {
-    class GameTimer {
+    class Timer {
     public:
-        GameTimer();
+        Timer();
 
         float TotalTime() const; // in seconds
         float DeltaTime() const; // in seconds

@@ -8,6 +8,9 @@ namespace Chen::CDX12 {
         device(device),
         cpuFence{cpuFence},
         gpuFence{gpuFence} {
+        tempUBVisitor.self = this;
+        tempRBVisitor.self = this;
+        tempVisitor.self   = this;
         ThrowIfFailed(device->CreateCommandAllocator(
             D3D12_COMMAND_LIST_TYPE_DIRECT,
             IID_PPV_ARGS(cmdAllocator.GetAddressOf())));

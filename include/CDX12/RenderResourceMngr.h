@@ -5,34 +5,32 @@
 namespace Chen::CDX12 {
     class MaterialMngr;
     class TextureMngr;
-    class ShaderMngr;
     class PSOManager;
+    class MeshMngr;
+    class ShaderMngr;
 
     class RenderResourceMngr {
     public:
-        static RenderResourceMngr& GetInstance() noexcept {
-            static RenderResourceMngr instance;
-            return instance;
-        }
+        RenderResourceMngr() = default;
+        ~RenderResourceMngr();
 
-        void Init(ID3D12Device* device, ID3D12GraphicsCommandList* cmdList);
+        void Init(ID3D12Device* device);
 
         MaterialMngr* GetMatMngr() { return matMngr; }
         TextureMngr*  GetTexMngr() { return texMngr; }
-        ShaderMngr*   GetShaderMngr() { return shaderMngr; }
         PSOManager*   GetPSOMngr() { return psoMngr; }
+        MeshMngr*     GetMeshMngr() { return meshMngr; }
+        ShaderMngr*   GetShaderMngr() { return shaderMngr; }
 
         void Clear();
 
     private:
-        RenderResourceMngr() = default;
-        ~RenderResourceMngr();
-
         bool isInit{false};
 
         MaterialMngr* matMngr{nullptr};
         TextureMngr*  texMngr{nullptr};
-        ShaderMngr*   shaderMngr{nullptr};
         PSOManager*   psoMngr{nullptr};
+        MeshMngr*     meshMngr{nullptr};
+        ShaderMngr*   shaderMngr{nullptr};
     };
 } // namespace Chen::CDX12

@@ -16,49 +16,56 @@ TextureMngr::~TextureMngr() {
         DescriptorHeapMngr::GetInstance().GetCSUGpuDH()->Free(std::move(textureSrvAllocation));
 }
 
-// size_t TextureMngr::CreateTextureFromFile(
-//     ID3D12Device*       device,
-//     ID3D12CommandQueue* cmdQueue,
-//     const std::wstring& path,
-//     const std::string&  name,
-//     TexFileFormat       format,
-//     TextureDimension    dimension) {
-//     if (name2index.find(name) != name2index.end()) return InvalidIndex; // name_only
-//     resourceUpload.Begin();
-//     auto tex      = std::make_unique<Texture>(dimension);
-//     tex->Filename = path;
-//     tex->Name     = name;
+size_t TextureMngr::CreateTextureFromFile(
+    ID3D12Device*       device,
+    ID3D12CommandQueue* cmdQueue,
+    TextureCreateInfo   create_info,
+    TexFileFormat       file_format) {
+    if (texname2index.find(create_info.name) != texname2index.end())
+        return InvalidIndex;
 
-//     if (format == TexFileFormat::WIC) {
-//         ThrowIfFailed(DirectX::CreateWICTextureFromFile(
-//             device,
-//             resourceUpload,
-//             path.c_str(),
-//             tex->Resource.ReleaseAndGetAddressOf()));
-//     }
-//     else if (format == TexFileFormat::DDS) {
-//         ThrowIfFailed(DirectX::CreateDDSTextureFromFile(
-//             device,
-//             resourceUpload,
-//             path.c_str(),
-//             tex->Resource.ReleaseAndGetAddressOf()));
-//     }
-//     else {
-//         return InvalidIndex;
-//     }
+    resourceUpload.Begin();
+    auto tex = std::make_unique<Texture>(
+        device,
+        create_info.width,
+        create_info.height,
+        create_info.format,
+        create_info.dimension,
+        create_info.depth,
+        create_info.mip,
+        create_info.usage,
+        create_info.resourceState);
 
-//     name2index[name] = mTextures.size();
-//     mTextures[name]  = std::move(tex);
-//     nameList.push_back(name);
+    switch (file_format) {
+        case TexFileFormat::DDS:
+            ThrowIfFailed(DirectX::CreateDDSTextureFromFile(
+                device,
+                resourceUpload,
+                create_info.path.c_str(),
+                get_rvalue_ptr(tex->GetResource())));
+            break;
+        case TexFileFormat::WIC:
+            ThrowIfFailed(DirectX::CreateWICTextureFromFile(
+                device,
+                resourceUpload,
+                create_info.path.c_str(),
+                get_rvalue_ptr(tex->GetResource())));
+            break;
+        default:
+            return InvalidIndex;
+    }
 
-//     D3D12_SHADER_RESOURCE_VIEW_DESC desc = mTextures[name]->GetTexSrvDesc();
-//     device->CreateShaderResourceView(
-//         mTextures[name]->Resource.Get(),
-//         &desc,
-//         textureSrvAllocation.GetCpuHandle(name2index[name]));
+    texname2index[create_info.name] = mTextures.size();
+    mTextures[create_info.name]     = std::move(tex);
 
-//     auto uploadResourcesFinished = resourceUpload.End(cmdQueue);
-//     uploadResourcesFinished.wait();
+    D3D12_SHADER_RESOURCE_VIEW_DESC desc = mTextures[create_info.name]->GetColorSrvDesc(0);
+    device->CreateShaderResourceView(
+        mTextures[create_info.name]->GetResource(),
+        &desc,
+        textureSrvAllocation.GetCpuHandle(texname2index[create_info.name]));
 
-//     return name2index[name];
-// }
+    auto uploadResourcesFinished = resourceUpload.End(cmdQueue);
+    uploadResourcesFinished.wait();
+
+    return texname2index[create_info.name];
+}

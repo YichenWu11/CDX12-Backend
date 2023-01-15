@@ -1,8 +1,7 @@
 #pragma once
 
-#include "../DXUtil.h"
-#include "../Math/MathHelper.h"
-
+#include <CDX12/DXUtil.h>
+#include <CDX12/Math/MathHelper.h>
 
 namespace Chen::CDX12 {
     // The Top Material class
@@ -47,12 +46,7 @@ namespace Chen::CDX12 {
 
         BasicMaterial* GetMaterial(const std::string& name) const;
 
-        std::vector<std::string>& GetMatNameList() { return nameList; }
-
-        std::map<std::string, std::unique_ptr<BasicMaterial>>& GetAllMats() { return mMaterials; }
-
     private:
         std::map<std::string, std::unique_ptr<BasicMaterial>> mMaterials;
-        std::vector<std::string>                              nameList;
     };
 } // namespace Chen::CDX12

@@ -16,7 +16,9 @@ namespace Chen::CDX12::detail {
 namespace Chen::CDX12 {
     ResourceStateTracker::ResourceStateTracker() {
     }
+
     ResourceStateTracker::~ResourceStateTracker() = default;
+
     void ResourceStateTracker::RecordState(Resource const* resource, D3D12_RESOURCE_STATES state) {
         auto initState = resource->GetInitState();
         auto ite       = stateMap.try_emplace(resource);
@@ -41,9 +43,11 @@ namespace Chen::CDX12 {
             }
         }
     }
+
     void ResourceStateTracker::RecordState(Resource const* resource) {
         RecordState(resource, resource->GetInitState());
     }
+
     void ResourceStateTracker::ExecuteStateMap() {
         for (auto&& i : stateMap) {
             if (i.second.uavBarrier) {
@@ -65,6 +69,7 @@ namespace Chen::CDX12 {
             i.second.lastState = i.second.curState;
         }
     }
+
     void ResourceStateTracker::RestoreStateMap() {
         for (auto&& i : stateMap) {
             i.second.curState = i.first->GetInitState();
@@ -103,6 +108,7 @@ namespace Chen::CDX12 {
             states.clear();
         }
     }
+
     void ResourceStateTracker::RestoreState(ID3D12GraphicsCommandList* cmdList) {
         RestoreStateMap();
         if (!states.empty()) {

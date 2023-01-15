@@ -1,9 +1,9 @@
-#include <CDX12/Common/GameTimer.h>
+#include <CDX12/Common/Timer.h>
 #include <windows.h>
 
 using namespace Chen::CDX12;
 
-GameTimer::GameTimer() :
+Timer::Timer() :
     mSecondsPerCount(0.0), mDeltaTime(-1.0), mBaseTime(0), mPausedTime(0), mPrevTime(0), mCurrTime(0), mStopped(false) {
     __int64 countsPerSec;
     QueryPerformanceFrequency((LARGE_INTEGER*)&countsPerSec);
@@ -12,7 +12,7 @@ GameTimer::GameTimer() :
 
 // Returns the total time elapsed since Reset() was called, NOT counting any
 // time when the clock is stopped.
-float GameTimer::TotalTime() const {
+float Timer::TotalTime() const {
     // If we are stopped, do not count the time that has passed since we stopped.
     // Moreover, if we previously already had a pause, the distance
     // mStopTime - mBaseTime includes paused time, which we do not want to count.
@@ -41,11 +41,11 @@ float GameTimer::TotalTime() const {
     }
 }
 
-float GameTimer::DeltaTime() const {
+float Timer::DeltaTime() const {
     return (float)mDeltaTime;
 }
 
-void GameTimer::Reset() {
+void Timer::Reset() {
     __int64 currTime;
     QueryPerformanceCounter((LARGE_INTEGER*)&currTime);
 
@@ -55,7 +55,7 @@ void GameTimer::Reset() {
     mStopped  = false;
 }
 
-void GameTimer::Start() {
+void Timer::Start() {
     __int64 startTime;
     QueryPerformanceCounter((LARGE_INTEGER*)&startTime);
 
@@ -74,7 +74,7 @@ void GameTimer::Start() {
     }
 }
 
-void GameTimer::Stop() {
+void Timer::Stop() {
     if (!mStopped) {
         __int64 currTime;
         QueryPerformanceCounter((LARGE_INTEGER*)&currTime);
@@ -84,7 +84,7 @@ void GameTimer::Stop() {
     }
 }
 
-void GameTimer::Tick() {
+void Timer::Tick() {
     if (mStopped) {
         mDeltaTime = 0.0;
         return;

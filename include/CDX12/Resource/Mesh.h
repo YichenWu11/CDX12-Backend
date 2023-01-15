@@ -7,15 +7,14 @@
 #include <CDX12/Resource/Resource.h>
 #include <CDX12/Util/ReflactableStruct.h>
 
-
 namespace Chen::CDX12 {
     class Mesh : public Resource {
-        std::vector<DefaultBuffer>            vertexBuffers;
-        DefaultBuffer                         indexBuffer;
-        std::span<rtti::Struct const*>        vertexStructs;
-        std::vector<D3D12_INPUT_ELEMENT_DESC> layout;
         uint32_t                              vertexCount;
+        std::span<rtti::Struct const*>        vertexStructs;
         uint32_t                              indexCount;
+        DefaultBuffer                         indexBuffer;
+        std::vector<DefaultBuffer>            vertexBuffers;
+        std::vector<D3D12_INPUT_ELEMENT_DESC> layout;
 
     public:
         std::span<DefaultBuffer const>            VertexBuffers() const { return vertexBuffers; }
@@ -29,5 +28,10 @@ namespace Chen::CDX12 {
 
         void                    GetVertexBufferView(std::vector<D3D12_VERTEX_BUFFER_VIEW>& result) const;
         D3D12_INDEX_BUFFER_VIEW GetIndexBufferView() const;
+
+        DirectX::BoundingBox& GetBoundingBox() { return bounding_box; }
+        DirectX::BoundingBox  GetBoundingBox() const { return bounding_box; }
+
+        DirectX::BoundingBox bounding_box;
     };
 } // namespace Chen::CDX12

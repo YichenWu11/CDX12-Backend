@@ -9,10 +9,12 @@ namespace Chen::CDX12 {
 
     class Resource {
     protected:
-        ID3D12Device* device;
+        ID3D12Device* device{nullptr};
 
     public:
         ID3D12Device* GetDevice() const { return device; }
+
+        Resource() = default;
 
         Resource(ID3D12Device* device) :
             device(device) {}
