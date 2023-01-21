@@ -7,13 +7,10 @@ namespace Chen::CDX12 {
     public:
         FrameResourceMngr(size_t numFrame, ID3D12Device*);
         ~FrameResourceMngr();
-        size_t                                             GetNumFrame() const noexcept { return frameResources.size(); }
-        FrameResource*                                     GetCurrentFrameResource() noexcept;
-        FrameResource*                                     GetLastFrameResource() noexcept;
-        FrameResource*                                     GetNextFrameResource() noexcept;
-        const std::vector<std::unique_ptr<FrameResource>>& GetFrameResources() const noexcept { return frameResources; }
-        size_t                                             GetCurrentCpuFence() const noexcept { return cpuFence; };
-        size_t                                             GetCurrentIndex() const noexcept { return (cpuFence % frameResources.size()); }
+        size_t         GetNumFrame() const noexcept { return frameResources.size(); }
+        FrameResource* GetCurrentFrameResource() noexcept;
+        size_t         GetCurrentCpuFence() const noexcept { return cpuFence; };
+        size_t         GetCurrentIndex() const noexcept { return (cpuFence % frameResources.size()); }
 
         void BeginFrame();
         void EndFrame(ID3D12CommandQueue*);

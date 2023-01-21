@@ -1,5 +1,7 @@
 #pragma once
 
+#include <SimpleMath.h>
+
 #include <CDX12/Resource/Resource.h>
 
 namespace Chen::CDX12 {
@@ -24,9 +26,16 @@ namespace Chen::CDX12 {
             GenericColor    = (0x4 | 0x1) // Both render target and unordered access
         };
 
-        static constexpr float   CLEAR_COLOR[4] = {0, 0, 0, 0};
-        static constexpr float   CLEAR_DEPTH    = 1;
-        static constexpr uint8_t CLEAR_STENCIL  = 0;
+        static float             CLEAR_COLOR[4];
+        static constexpr float   CLEAR_DEPTH   = 1;
+        static constexpr uint8_t CLEAR_STENCIL = 0;
+
+        static void setClearColor(const DirectX::SimpleMath::Color& color) {
+            CLEAR_COLOR[0] = color.R();
+            CLEAR_COLOR[1] = color.G();
+            CLEAR_COLOR[2] = color.B();
+            CLEAR_COLOR[3] = color.A();
+        }
 
     private:
         D3D12_RESOURCE_STATES  initState;

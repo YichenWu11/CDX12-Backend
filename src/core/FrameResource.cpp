@@ -1,6 +1,18 @@
 #include <CDX12/FrameResource.h>
 
 namespace Chen::CDX12 {
+    FrameResource& FrameResource::UnregisterResource(std::string_view name) {
+        assert(HaveResource(name));
+
+        resourceMap.erase(resourceMap.find(name));
+
+        return *this;
+    }
+
+    // *******************************************************************************************
+    // *******************************************************************************************
+    // *******************************************************************************************
+
     FrameResource::FrameResource(UINT64 cpuFence, ID3D12Fence* gpuFence, ID3D12Device* device) :
         ubAlloc(TEMP_SIZE, &tempUBVisitor),
         rbAlloc(TEMP_SIZE, &tempRBVisitor),
@@ -23,6 +35,9 @@ namespace Chen::CDX12 {
             IID_PPV_ARGS(cmdList.raw.GetAddressOf())));
 
         ThrowIfFailed(cmdList->Close());
+    }
+
+    FrameResource::~FrameResource() {
     }
 
     void FrameResource::Execute(ID3D12CommandQueue* queue) {
@@ -56,14 +71,6 @@ namespace Chen::CDX12 {
         ubAlloc.Clear();
         dbAlloc.Clear();
         rbAlloc.Clear();
-    }
-
-    FrameResource& FrameResource::UnregisterResource(std::string_view name) {
-        assert(HaveResource(name));
-
-        resourceMap.erase(resourceMap.find(name));
-
-        return *this;
     }
 
     CmdListHandle FrameResource::Command() {

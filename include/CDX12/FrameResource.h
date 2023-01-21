@@ -20,6 +20,7 @@ namespace Chen::CDX12 {
     class FrameResource {
     public:
         FrameResource(UINT64 cpuFence, ID3D12Fence* gpuFence, ID3D12Device* device);
+        ~FrameResource();
 
         bool HaveResource(std::string_view name) const { return resourceMap.find(name) != resourceMap.end(); }
 
@@ -100,8 +101,8 @@ namespace Chen::CDX12 {
 
         bool populated = false;
 
-        Microsoft::WRL::ComPtr<ID3D12CommandAllocator> cmdAllocator;
         GCmdList                                       cmdList;
+        Microsoft::WRL::ComPtr<ID3D12CommandAllocator> cmdAllocator;
 
         UINT64       cpuFence;
         ID3D12Fence* gpuFence;

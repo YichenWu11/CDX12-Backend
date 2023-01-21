@@ -19,19 +19,8 @@ FrameResource* FrameResourceMngr::GetCurrentFrameResource() noexcept {
     return frameResources[cpuFence % frameResources.size()].get();
 }
 
-FrameResource* FrameResourceMngr::GetLastFrameResource() noexcept {
-    if (cpuFence == 0)
-        return frameResources[0].get();
-    return frameResources[(cpuFence + 2) % frameResources.size()].get();
-}
-
-FrameResource* FrameResourceMngr::GetNextFrameResource() noexcept {
-    return frameResources[(cpuFence + 1) % frameResources.size()].get();
-}
-
 void FrameResourceMngr::BeginFrame() {
-    // GetCurrentFrameResource()->BeginFrame(eventHandle);
-    GetNextFrameResource()->BeginFrame(eventHandle);
+    GetCurrentFrameResource()->BeginFrame(eventHandle);
 }
 
 void FrameResourceMngr::Execute(ID3D12CommandQueue* queue) {

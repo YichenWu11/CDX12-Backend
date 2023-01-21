@@ -3,6 +3,8 @@
 #include <CDX12/Material/Texture.h>
 
 namespace Chen::CDX12 {
+    float Texture::CLEAR_COLOR[4] = {0.1f, 0.1f, 0.1f, 1.0f};
+
     Texture::Texture(
         ID3D12Device*         device,
         uint                  width,
