@@ -26,11 +26,10 @@ target_include_directories(${PROJECT_NAME}
 
 find_package(directxtk12 CONFIG REQUIRED)
 
-target_link_libraries(${PROJECT_NAME} PUBLIC
-    d3d12.lib dxgi.lib dxguid.lib uuid.lib
-    kernel32.lib user32.lib d3dcompiler.lib
-    comdlg32.lib advapi32.lib shell32.lib
-    ole32.lib oleaut32.lib
-    runtimeobject.lib
-    Microsoft::DirectXTK12
+target_link_libraries(${PROJECT_NAME}
+    PUBLIC d3d12.lib
+    PUBLIC dxgi.lib
+    PUBLIC dxguid.lib
+    PUBLIC d3dcompiler.lib
+    PUBLIC Microsoft::DirectXTK12
 )
