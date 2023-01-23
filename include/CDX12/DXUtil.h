@@ -1,6 +1,12 @@
 #pragma once
 
+#ifndef WIN32_LEAN_AND_MEAN
 #define WIN32_LEAN_AND_MEAN
+#endif
+
+#ifndef BT_NO_SIMD_OPERATOR_OVERLOADS
+#define BT_NO_SIMD_OPERATOR_OVERLOADS
+#endif
 
 #include "_deps/d3dx12.h"
 #include <CDX12/Metalib.h>
