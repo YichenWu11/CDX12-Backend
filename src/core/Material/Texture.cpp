@@ -22,6 +22,9 @@ namespace Chen::CDX12 {
         D3D12_RESOURCE_DESC texDesc;
         memset(&texDesc, 0, sizeof(D3D12_RESOURCE_DESC));
 
+        if (usage == TextureUsage::ShaderRes)
+            return;
+
         switch (dimension) {
             case TextureDimension::Cubemap:
             case TextureDimension::Tex2DArray:
@@ -81,7 +84,7 @@ namespace Chen::CDX12 {
             D3D12_HEAP_FLAG_NONE,
             &texDesc,
             initState,
-            &clearValue,
+            (usage == TextureUsage::None) ? NULL : &clearValue,
             IID_PPV_ARGS(&resource)));
     }
 

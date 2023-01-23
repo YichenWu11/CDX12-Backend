@@ -23,7 +23,8 @@ namespace Chen::CDX12 {
             RenderTarget    = 0x1,
             DepthStencil    = 0x2,
             UnorderedAccess = 0x4,
-            GenericColor    = (0x4 | 0x1) // Both render target and unordered access
+            GenericColor    = (0x4 | 0x1), // Both render target and unordered access
+            ShaderRes       = 0x8
         };
 
         static float             CLEAR_COLOR[4];
@@ -68,6 +69,10 @@ namespace Chen::CDX12 {
         D3D12_RESOURCE_STATES GetInitState() const override {
             return initState;
         }
+        ID3D12Resource** ReleaseAndGetAddress() override {
+            return resource.ReleaseAndGetAddressOf();
+        }
+
         D3D12_SHADER_RESOURCE_VIEW_DESC  GetColorSrvDesc(uint mipOffset) const;
         D3D12_UNORDERED_ACCESS_VIEW_DESC GetColorUavDesc(uint targetMipLevel) const;
         void                             DelayDispose(FrameResource* frameRes) const override;
