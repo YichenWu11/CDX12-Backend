@@ -22,22 +22,7 @@ namespace Chen::CDX12 {
         FrameResource(UINT64 cpuFence, ID3D12Fence* gpuFence, ID3D12Device* device);
         ~FrameResource();
 
-        bool HaveResource(std::string_view name) const { return resourceMap.find(name) != resourceMap.end(); }
-
-        template <typename T>
-        FrameResource& RegisterResource(std::string name, T&& resource);
-
-        FrameResource& UnregisterResource(std::string_view name);
-
-        template <typename T>
-        T& GetResource(std::string_view name);
-        template <typename T>
-        const T& GetResource(std::string_view name) const;
-
-        GCmdList GetCmdList() { return cmdList; }
-
-        // ***********************************************************************************
-
+        GCmdList      GetCmdList() { return cmdList; }
         CmdListHandle Command();
         void          AddDelayDisposeResource(ComPtr<ID3D12Resource> const& ptr);
 
@@ -79,14 +64,6 @@ namespace Chen::CDX12 {
             uint64         Allocate(uint64 size) override;
             void           DeAllocate(uint64 handle) override;
         };
-        Visitor<UploadBuffer>                 tempUBVisitor;
-        Visitor<DefaultBuffer>                tempVisitor;
-        Visitor<ReadbackBuffer>               tempRBVisitor;
-        StackAllocator                        ubAlloc;
-        StackAllocator                        rbAlloc;
-        StackAllocator                        dbAlloc;
-        ID3D12Device*                         device;
-        std::vector<D3D12_VERTEX_BUFFER_VIEW> vertexBufferView;
 
         BufferView GetTempBuffer(size_t size, size_t align, StackAllocator& alloc);
 
@@ -99,6 +76,16 @@ namespace Chen::CDX12 {
         // run delay updator and unregister
         void BeginFrame(HANDLE sharedEventHandle);
 
+    private:
+        Visitor<UploadBuffer>                 tempUBVisitor;
+        Visitor<DefaultBuffer>                tempVisitor;
+        Visitor<ReadbackBuffer>               tempRBVisitor;
+        StackAllocator                        ubAlloc;
+        StackAllocator                        rbAlloc;
+        StackAllocator                        dbAlloc;
+        ID3D12Device*                         device;
+        std::vector<D3D12_VERTEX_BUFFER_VIEW> vertexBufferView;
+
         bool populated = false;
 
         GCmdList                                       cmdList;
@@ -107,11 +94,8 @@ namespace Chen::CDX12 {
         UINT64       cpuFence;
         ID3D12Fence* gpuFence;
 
-        std::map<std::string, std::any, std::less<>> resourceMap;
-        std::vector<ComPtr<ID3D12Resource>>          delayDisposeResources;
+        std::vector<ComPtr<ID3D12Resource>> delayDisposeResources;
 
         std::vector<std::function<void()>> afterSyncEvents;
     };
 } // namespace Chen::CDX12
-
-#include "details/FrameResourceMngr.inl"
