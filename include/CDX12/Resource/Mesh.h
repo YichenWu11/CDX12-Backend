@@ -29,6 +29,8 @@ namespace Chen::CDX12 {
         void                    GetVertexBufferView(std::vector<D3D12_VERTEX_BUFFER_VIEW>& result) const;
         D3D12_INDEX_BUFFER_VIEW GetIndexBufferView() const;
 
+        void DelayDispose(FrameResource* frameres);
+
         DirectX::BoundingBox& GetBoundingBox() { return bounding_box; }
         DirectX::BoundingBox  GetBoundingBox() const { return bounding_box; }
 

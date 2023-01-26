@@ -20,6 +20,12 @@ namespace Chen::CDX12 {
         }
     }
 
+    void Mesh::DelayDispose(FrameResource* frameres) {
+        indexBuffer.DelayDispose(frameres);
+        for (auto&& vb : vertexBuffers)
+            vb.DelayDispose(frameres);
+    }
+
     void Mesh::GetVertexBufferView(std::vector<D3D12_VERTEX_BUFFER_VIEW>& result) const {
         result.clear();
         result.resize(vertexBuffers.size());
