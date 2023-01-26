@@ -12,8 +12,8 @@ BufferView::BufferView(
     uint64_t      offset,
     uint64_t      byteSize) :
     buffer(buffer),
-    offset(offset),
-    byteSize(byteSize) {}
+    byteSize(byteSize),
+    offset(offset) {}
 
 Buffer::Buffer(ID3D12Device* device) :
     Resource(device) {}

@@ -1,18 +1,6 @@
 #include <CDX12/FrameResource.h>
 
 namespace Chen::CDX12 {
-    FrameResource& FrameResource::UnregisterResource(std::string_view name) {
-        assert(HaveResource(name));
-
-        resourceMap.erase(resourceMap.find(name));
-
-        return *this;
-    }
-
-    // *******************************************************************************************
-    // *******************************************************************************************
-    // *******************************************************************************************
-
     FrameResource::FrameResource(UINT64 cpuFence, ID3D12Fence* gpuFence, ID3D12Device* device) :
         ubAlloc(TEMP_SIZE, &tempUBVisitor),
         rbAlloc(TEMP_SIZE, &tempRBVisitor),

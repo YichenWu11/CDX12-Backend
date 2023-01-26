@@ -24,7 +24,6 @@ namespace Chen::CDX12 {
             DepthStencil    = 0x2,
             UnorderedAccess = 0x4,
             GenericColor    = (0x4 | 0x1), // Both render target and unordered access
-            ShaderRes       = 0x8
         };
 
         static float             CLEAR_COLOR[4];

@@ -2,7 +2,6 @@
 
 using namespace Chen::CDX12;
 
-// resource: ComPtr<xxx>.GetAddressOf()
 void Device::CreateCommittedResource(
     D3D12_HEAP_TYPE  heap_type,
     SIZE_T           size,
