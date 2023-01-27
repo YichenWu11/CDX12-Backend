@@ -92,6 +92,13 @@ Shader::Shader(
         IID_PPV_ARGS(rootSig.GetAddressOf())));
 }
 
+int32_t Shader::GetPropRootSigPos(std::string_view propertyName) const {
+    auto var = GetProperty(propertyName);
+    if (!var)
+        return -1;
+    return var->rootSigPos;
+}
+
 bool Shader::SetResource(
     std::string_view           propertyName,
     ID3D12GraphicsCommandList* cmdList,
