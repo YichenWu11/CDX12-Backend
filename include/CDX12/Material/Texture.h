@@ -75,5 +75,8 @@ namespace Chen::CDX12 {
         D3D12_SHADER_RESOURCE_VIEW_DESC  GetColorSrvDesc(uint mipOffset) const;
         D3D12_UNORDERED_ACCESS_VIEW_DESC GetColorUavDesc(uint targetMipLevel) const;
         void                             DelayDispose(FrameResource* frameRes) const override;
+
+        uint GetWidth() { return resource->GetDesc().Width; }
+        uint GetHeight() { return resource->GetDesc().Height; };
     };
 } // namespace Chen::CDX12
