@@ -17,6 +17,13 @@
 #include <CDX12/Util/StackAllocator.h>
 
 namespace Chen::CDX12 {
+    struct IndirectDrawCommand {
+        D3D12_GPU_VIRTUAL_ADDRESS    object_cbuffer_address; // Object Constant Buffer Address
+        D3D12_VERTEX_BUFFER_VIEW     vertex_buffer;          // Vertex Buffer Address
+        D3D12_INDEX_BUFFER_VIEW      index_buffer;           // Index Buffer Address
+        D3D12_DRAW_INDEXED_ARGUMENTS draw_args;              // Draw Arguments
+    };
+
     class FrameResource {
     public:
         FrameResource(UINT64 cpuFence, ID3D12Fence* gpuFence, ID3D12Device* device);
@@ -51,6 +58,19 @@ namespace Chen::CDX12 {
             DXGI_FORMAT             colorFormat,
             DXGI_FORMAT             depthFormat,
             std::span<BindProperty> properties);
+
+        void DrawMeshIndirect(
+            BasicShader const*                        shader,
+            PSOManager*                               psoManager,
+            std::span<D3D12_INPUT_ELEMENT_DESC const> layout,
+            DXGI_FORMAT                               colorFormat,
+            DXGI_FORMAT                               depthFormat,
+            std::span<BindProperty>                   properties,
+            UploadBuffer*                             indirectDrawBuffer,
+            uint32_t                                  mesh_count,
+            ID3D12CommandSignature*                   command_sign);
+
+        Chen::CDX12::IndirectDrawCommand getIndirectArguments(Chen::CDX12::Mesh* mesh, D3D12_GPU_VIRTUAL_ADDRESS, uint32_t offset, uint32_t per_size);
 
     private:
         friend class FrameResourceMngr;

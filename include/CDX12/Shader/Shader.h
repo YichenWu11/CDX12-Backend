@@ -51,6 +51,8 @@ namespace Chen::CDX12 {
 
         Shader(Shader&& v) = default;
 
+        int32_t GetPropRootSigPos(std::string_view propertyName) const;
+
         ID3D12RootSignature* RootSig() const { return rootSig.Get(); }
 
         bool SetResource(

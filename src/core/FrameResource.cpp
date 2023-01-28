@@ -221,4 +221,81 @@ namespace Chen::CDX12 {
             0,
             0);
     }
+
+    IndirectDrawCommand FrameResource::getIndirectArguments(Mesh* mesh, D3D12_GPU_VIRTUAL_ADDRESS obj_cb_addr, uint32_t offset, uint32_t per_size) {
+        UINT cb_byte_size = DXUtil::CalcConstantBufferByteSize(per_size);
+
+        IndirectDrawCommand command;
+        command.object_cbuffer_address = obj_cb_addr + cb_byte_size * offset;
+        mesh->GetVertexBufferView(vertexBufferView);
+        // TODO:
+        command.vertex_buffer                   = vertexBufferView[0];
+        command.index_buffer                    = mesh->GetIndexBufferView();
+        command.draw_args.BaseVertexLocation    = 0;
+        command.draw_args.IndexCountPerInstance = mesh->IndexBuffer().GetByteSize() / 4;
+        command.draw_args.InstanceCount         = 1;
+        command.draw_args.StartIndexLocation    = 0;
+        command.draw_args.StartInstanceLocation = 0;
+
+        return command;
+    }
+
+    void FrameResource::DrawMeshIndirect(
+        BasicShader const*                        shader,
+        PSOManager*                               psoManager,
+        std::span<D3D12_INPUT_ELEMENT_DESC const> layout,
+        DXGI_FORMAT                               colorFormat,
+        DXGI_FORMAT                               depthFormat,
+        std::span<BindProperty>                   properties,
+        UploadBuffer*                             indirectDrawBuffer,
+        uint32_t                                  draw_count,
+        ID3D12CommandSignature*                   command_sign) {
+        cmdList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+        cmdList->SetPipelineState(
+            psoManager->GetPipelineState(
+                layout,
+                shader,
+                {&colorFormat, 1},
+                depthFormat));
+
+        struct PropertyBinder {
+            ID3D12GraphicsCommandList* cmdList;
+            Shader const*              shader;
+            std::string const*         name;
+            void                       operator()(BufferView const& bfView) const {
+                                      if (!shader->SetResource(
+                                              *name,
+                                              cmdList,
+                                              bfView)) {
+                                          throw "Invalid shader binding";
+                }
+            }
+            void operator()(DescriptorHeapAllocView const& descView) const {
+                if (!shader->SetResource(
+                        *name,
+                        cmdList,
+                        descView)) {
+                    throw "Invalid shader binding";
+                }
+            }
+        };
+
+        cmdList->SetGraphicsRootSignature(shader->RootSig());
+        PropertyBinder binder{
+            .cmdList = cmdList.Get(),
+            .shader  = shader};
+
+        for (auto&& i : properties) {
+            binder.name = &i.name;
+            std::visit(binder, i.prop);
+        }
+
+        cmdList->ExecuteIndirect(
+            command_sign,
+            draw_count,
+            indirectDrawBuffer->GetResource(),
+            0,
+            nullptr,
+            0);
+    }
 } // namespace Chen::CDX12
