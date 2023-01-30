@@ -81,7 +81,7 @@ namespace Chen::CDX12 {
             D3D12_HEAP_FLAG_NONE,
             &texDesc,
             initState,
-            (usage == TextureUsage::None) ? NULL : &clearValue,
+            &clearValue,
             IID_PPV_ARGS(&resource)));
     }
 
