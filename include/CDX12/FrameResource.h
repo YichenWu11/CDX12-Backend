@@ -25,6 +25,8 @@ namespace Chen::CDX12 {
     };
 
     class FrameResource {
+        friend class FrameResourceMngr;
+
     public:
         FrameResource(UINT64 cpuFence, ID3D12Fence* gpuFence, ID3D12Device* device);
         ~FrameResource();
@@ -44,6 +46,7 @@ namespace Chen::CDX12 {
                   uint64        srcOffset,
                   uint64        dstOffset,
                   uint64        byteSize);
+
         void SetRenderTarget(
             Texture const*                       tex,
             CD3DX12_CPU_DESCRIPTOR_HANDLE const* rtvHandle,
@@ -73,8 +76,6 @@ namespace Chen::CDX12 {
         Chen::CDX12::IndirectDrawCommand getIndirectArguments(Chen::CDX12::Mesh* mesh, D3D12_GPU_VIRTUAL_ADDRESS, uint32_t offset, uint32_t per_size);
 
     private:
-        friend class FrameResourceMngr;
-
         static constexpr size_t TEMP_SIZE = 1024ull * 1024ull;
 
         template <typename T>
