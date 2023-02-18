@@ -5,16 +5,17 @@
 #include <CDX12/CmdListHandle.h>
 #include <CDX12/DXUtil.h>
 #include <CDX12/GCmdList.h>
-#include <CDX12/Material/Texture.h>
 #include <CDX12/Math/MathHelper.h>
 #include <CDX12/Resource/DefaultBuffer.h>
 #include <CDX12/Resource/Mesh.h>
 #include <CDX12/Resource/ReadbackBuffer.h>
+#include <CDX12/Resource/Texture.h>
 #include <CDX12/Resource/UploadBuffer.h>
 #include <CDX12/Shader/BasicShader.h>
 #include <CDX12/Shader/PSOManager.h>
 #include <CDX12/Util/BindProperty.h>
 #include <CDX12/Util/StackAllocator.h>
+
 
 namespace Chen::CDX12 {
     struct IndirectDrawCommand {

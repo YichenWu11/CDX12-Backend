@@ -396,9 +396,6 @@ namespace Chen::CDX12 {
             nullptr,
             IID_PPV_ARGS(m_cmdlist.raw.GetAddressOf())));
 
-        m_renderresource_mngr = std::make_unique<RenderResourceMngr>();
-        m_renderresource_mngr->Init(m_device.Get());
-
         // Start off in a closed state.  This is because the first time we refer
         // to the command list we will Reset it, and it needs to be closed before
         // calling Reset.

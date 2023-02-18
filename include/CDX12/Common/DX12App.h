@@ -12,10 +12,9 @@
 #include <CDX12/Device.h>
 #include <CDX12/FrameResourceMngr.h>
 #include <CDX12/GeneralDesc.h>
-#include <CDX12/Material/Texture.h>
 #include <CDX12/Metalib.h>
-#include <CDX12/RenderResourceMngr.h>
 #include <CDX12/Resource/ResourceStateTracker.h>
+#include <CDX12/Resource/Texture.h>
 
 namespace Chen::CDX12 {
     class DX12App {
@@ -104,8 +103,7 @@ namespace Chen::CDX12 {
         GCmdList                                       m_cmdlist;
         Microsoft::WRL::ComPtr<ID3D12CommandAllocator> m_direct_cmdlist_alloc;
 
-        std::unique_ptr<FrameResourceMngr>  m_frameresource_mngr;
-        std::unique_ptr<RenderResourceMngr> m_renderresource_mngr;
+        std::unique_ptr<FrameResourceMngr> m_frameresource_mngr;
 
         ResourceStateTracker m_state_tracker;
 

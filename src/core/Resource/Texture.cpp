@@ -1,6 +1,6 @@
 #include <CDX12/FrameResource.h>
 #include <CDX12/GeneralDesc.h>
-#include <CDX12/Material/Texture.h>
+#include <CDX12/Resource/Texture.h>
 
 namespace Chen::CDX12 {
     float Texture::CLEAR_COLOR[4] = {0.2f, 0.2f, 0.2f, 1.0f};
