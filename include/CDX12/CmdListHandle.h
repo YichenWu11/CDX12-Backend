@@ -7,19 +7,22 @@
 
 #include <CDX12/DXUtil.h>
 
-class CmdListHandle {
-    ID3D12GraphicsCommandList* cmdList;
+namespace Chen::CDX12 {
+    class CmdListHandle {
+        ID3D12GraphicsCommandList* cmdList;
 
-public:
-    CmdListHandle(CmdListHandle&&) noexcept;
+    public:
+        CmdListHandle(CmdListHandle&&) noexcept;
 
-    CmdListHandle(CmdListHandle const&) = delete;
+        CmdListHandle(CmdListHandle const&) = delete;
 
-    ID3D12GraphicsCommandList* CmdList() const { return cmdList; }
+        ID3D12GraphicsCommandList* CmdList() const { return cmdList; }
 
-    CmdListHandle(
-        ID3D12CommandAllocator*    allocator,
-        ID3D12GraphicsCommandList* cmdList);
+        CmdListHandle(
+            ID3D12CommandAllocator*    allocator,
+            ID3D12GraphicsCommandList* cmdList);
 
-    ~CmdListHandle();
-};
+        ~CmdListHandle();
+    };
+
+} // namespace Chen::CDX12
