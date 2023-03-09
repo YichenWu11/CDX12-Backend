@@ -1,5 +1,7 @@
 .cache
 .vscode
 .VSCodeCounter
+compile_commands.json
+.xmake
 
 build

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <SimpleMath.h>
+#include <directxtk12/SimpleMath.h>
 
 #include <CDX12/Resource/Resource.h>
 

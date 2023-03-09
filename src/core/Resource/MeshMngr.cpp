@@ -1,7 +1,7 @@
 #include <iostream>
 
 #include <CDX12/_deps/tinyobjloader/tinyobjloader.h>
-#include <SimpleMath.h>
+#include <directxtk12/SimpleMath.h>
 
 #include <CDX12/DXUtil.h>
 #include <CDX12/Math/MathHelper.h>
