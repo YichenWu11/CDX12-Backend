@@ -2,7 +2,7 @@
 
 using namespace Chen::CDX12;
 
-DescriptorHeapAllocationMngr::DescriptorHeapAllocationMngr(DescriptorHeapAllocationMngr&& rhs) :
+DescriptorHeapAllocationMngr::DescriptorHeapAllocationMngr(DescriptorHeapAllocationMngr&& rhs) noexcept :
     m_pDevice{rhs.m_pDevice},
     m_ParentAllocator{rhs.m_ParentAllocator},
     m_ThisManagerId{rhs.m_ThisManagerId},

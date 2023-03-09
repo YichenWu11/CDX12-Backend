@@ -33,7 +33,7 @@ namespace Chen::CDX12 {
             uint32_t              NumDescriptors);
 
         // Move constructor
-        DescriptorHeapAllocationMngr(DescriptorHeapAllocationMngr&& rhs);
+        DescriptorHeapAllocationMngr(DescriptorHeapAllocationMngr&& rhs) noexcept;
 
         DescriptorHeapAllocationMngr& operator=(DescriptorHeapAllocationMngr&& rhs)  = delete;
         DescriptorHeapAllocationMngr(const DescriptorHeapAllocationMngr&)            = delete;
