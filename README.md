@@ -1,6 +1,8 @@
 # CDX12
 DX12 C++ Wrapper
 
+***main分支为cmake版本，dev分支为xmake版本***
+
 <img src="./docs/cdx12-note/images/Descriptor_Heap.png">
 
 ---
