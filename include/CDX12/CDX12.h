@@ -1,5 +1,6 @@
 #pragma once
 
+#include "CDX12/Blob.h"
 #include "CDX12/CmdListHandle.h"
 #include "CDX12/CmdQueue.h"
 #include "CDX12/DXUtil.h"

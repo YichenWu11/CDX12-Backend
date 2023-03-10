@@ -3,7 +3,7 @@
 #include <unordered_map>
 #include <unordered_set>
 
-#include <CDX12/DXUtil.h>
+#include "CDX12/DXUtil.h"
 
 namespace CDX12 {
     class Resource;

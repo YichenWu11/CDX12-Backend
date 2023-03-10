@@ -81,11 +81,9 @@ namespace CDX12 {
         static constexpr size_t DynamicHeapAllocatonManagerID = 1;
 
         // Allocation manager for static/mutable part
-        std::mutex                   m_AllocMutex;
         DescriptorHeapAllocationMngr m_HeapAllocationManager;
 
         // Allocation manager for dynamic part
-        std::mutex                   m_DynAllocMutex;
         DescriptorHeapAllocationMngr m_DynamicAllocationsManager;
     };
 } // namespace CDX12

@@ -10,8 +10,8 @@
         - ReadbackBuffer
 */
 
-#include <CDX12/Resource/BufferView.h>
-#include <CDX12/Resource/Resource.h>
+#include "CDX12/Resource/BufferView.h"
+#include "CDX12/Resource/Resource.h"
 
 namespace CDX12 {
     class Buffer : public Resource {

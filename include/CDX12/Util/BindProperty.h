@@ -3,8 +3,8 @@
 #include <string>
 #include <variant>
 
-#include <CDX12/Resource/BufferView.h>
-#include <CDX12/Resource/DescHeapAllocView.h>
+#include "CDX12/Resource/BufferView.h"
+#include "CDX12/Resource/DescHeapAllocView.h"
 
 namespace CDX12 {
     struct BindProperty {

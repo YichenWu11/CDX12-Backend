@@ -2,7 +2,7 @@
 
 #include <directxtk12/SimpleMath.h>
 
-#include <CDX12/Resource/Resource.h>
+#include "CDX12/Resource/Resource.h"
 
 namespace CDX12 {
     enum class TextureDimension : uint8_t {

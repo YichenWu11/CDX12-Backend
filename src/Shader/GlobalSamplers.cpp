@@ -1,4 +1,4 @@
-#include <CDX12/Shader/GlobalSamplers.h>
+#include "CDX12/Shader/GlobalSamplers.h"
 
 namespace CDX12 {
     struct GlobalSampleData {

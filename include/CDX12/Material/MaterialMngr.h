@@ -1,7 +1,7 @@
 #pragma once
 
-#include <CDX12/DXUtil.h>
-#include <CDX12/Math/MathHelper.h>
+#include "CDX12/DXUtil.h"
+#include "CDX12/Math/MathHelper.h"
 
 namespace CDX12 {
     // The Top Material class

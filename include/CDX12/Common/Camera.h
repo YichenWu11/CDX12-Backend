@@ -1,7 +1,7 @@
 #pragma once
 
-#include <CDX12/DXUtil.h>
-#include <CDX12/Math/Quaternion.h>
+#include "CDX12/DXUtil.h"
+#include "CDX12/Math/Quaternion.h"
 
 namespace CDX12 {
     class Camera {

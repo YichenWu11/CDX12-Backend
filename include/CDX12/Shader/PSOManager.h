@@ -1,7 +1,7 @@
 #pragma once
 
-#include <CDX12/DXUtil.h>
-#include <CDX12/Util/Hash.h>
+#include "CDX12/DXUtil.h"
+#include "CDX12/Util/Hash.h"
 
 // hash
 namespace std {

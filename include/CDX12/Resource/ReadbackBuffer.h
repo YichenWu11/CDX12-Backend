@@ -1,6 +1,6 @@
 #pragma once
 
-#include <CDX12/Resource/Buffer.h>
+#include "CDX12/Resource/Buffer.h"
 
 namespace CDX12 {
     class ReadbackBuffer final : public Buffer {

@@ -1,12 +1,12 @@
 #include <iostream>
 
-#include <CDX12/_deps/tinyobjloader/tinyobjloader.h>
+#include "CDX12/_deps/tinyobjloader/tinyobjloader.h"
 #include <directxtk12/SimpleMath.h>
 
-#include <CDX12/DXUtil.h>
-#include <CDX12/Math/MathHelper.h>
-#include <CDX12/Resource/MeshMngr.h>
-#include <CDX12/Resource/UploadBuffer.h>
+#include "CDX12/DXUtil.h"
+#include "CDX12/Math/MathHelper.h"
+#include "CDX12/Resource/MeshMngr.h"
+#include "CDX12/Resource/UploadBuffer.h"
 
 using namespace DirectX;
 

@@ -8,8 +8,8 @@
 #define BT_NO_SIMD_OPERATOR_OVERLOADS
 #endif
 
+#include "CDX12/Metalib.h"
 #include "_deps/d3dx12.h"
-#include <CDX12/Metalib.h>
 #include <D3Dcompiler.h>
 #include <DirectXCollision.h>
 #include <DirectXColors.h>
@@ -21,6 +21,7 @@
 #include <shellapi.h>
 #include <windows.h>
 #include <wrl.h>
+
 
 #include <algorithm>
 #include <any>

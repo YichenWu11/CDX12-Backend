@@ -1,4 +1,4 @@
-#include <CDX12/CmdListHandle.h>
+#include "CDX12/CmdListHandle.h"
 
 namespace CDX12 {
     CmdListHandle::CmdListHandle(CmdListHandle&& v) noexcept :
@@ -18,5 +18,4 @@ namespace CDX12 {
         if (cmdList)
             cmdList->Close();
     }
-
 } // namespace CDX12

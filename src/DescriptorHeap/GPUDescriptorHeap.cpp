@@ -1,4 +1,4 @@
-#include <CDX12/DescripitorHeap/GPUDescriptorHeap.h>
+#include "CDX12/DescripitorHeap/GPUDescriptorHeap.h"
 
 namespace CDX12 {
     GPUDescriptorHeap::GPUDescriptorHeap(
@@ -27,13 +27,12 @@ namespace CDX12 {
 
     void GPUDescriptorHeap::Free(DescriptorHeapAllocation&& Allocation) {
         auto MgrId = Allocation.GetAllocationManagerId();
-        if (MgrId == 0) {
-            std::lock_guard<std::mutex> LockGuard(m_AllocMutex);
+        assert((MgrId == StaticHeapAllocatonManagerID || MgrId == DynamicHeapAllocatonManagerID)
+               && "Unexpected allocation manager ID");
+
+        if (MgrId == StaticHeapAllocatonManagerID)
             m_HeapAllocationManager.FreeAllocation(std::move(Allocation));
-        }
-        else {
-            std::lock_guard<std::mutex> LockGuard(m_DynAllocMutex);
+        else // MgrId == DynamicHeapAllocatonManagerID
             m_DynamicAllocationsManager.FreeAllocation(std::move(Allocation));
-        }
     }
 } // namespace CDX12

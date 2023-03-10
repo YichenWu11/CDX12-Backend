@@ -1,6 +1,7 @@
-#include <CDX12/FrameResource.h>
-#include <CDX12/GeneralDesc.h>
-#include <CDX12/Resource/Texture.h>
+#include "CDX12/Resource/Texture.h"
+#include "CDX12/FrameResource.h"
+#include "CDX12/GeneralDesc.h"
+
 
 namespace CDX12 {
     float Texture::CLEAR_COLOR[4] = {0.2f, 0.2f, 0.2f, 1.0f};

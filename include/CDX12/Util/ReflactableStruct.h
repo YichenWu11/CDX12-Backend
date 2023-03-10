@@ -4,8 +4,8 @@
 #include <memory>
 #include <string>
 
-#include <CDX12/DXUtil.h>
-#include <CDX12/Metalib.h>
+#include "CDX12/DXUtil.h"
+#include "CDX12/Metalib.h"
 
 namespace CDX12::rtti {
     // Interpret a variable's type in structure

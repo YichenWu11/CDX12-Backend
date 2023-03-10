@@ -1,6 +1,6 @@
 #include <string_view>
 
-#include <CDX12/Util/ReflactableStruct.h>
+#include "CDX12/Util/ReflactableStruct.h"
 
 namespace CDX12::rtti {
     static thread_local Struct* curStruct = nullptr;

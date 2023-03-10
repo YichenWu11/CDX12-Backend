@@ -1,20 +1,20 @@
 #pragma once
 
-#include <CDX12/Common/Timer.h>
+#include "CDX12/Common/Timer.h"
 
-#include <CDX12/DescripitorHeap/CPUDescriptorHeap.h>
-#include <CDX12/DescripitorHeap/DescriptorHeapWrapper.h>
-#include <CDX12/DescripitorHeap/GPUDescriptorHeap.h>
+#include "CDX12/DescripitorHeap/CPUDescriptorHeap.h"
+#include "CDX12/DescripitorHeap/DescriptorHeapWrapper.h"
+#include "CDX12/DescripitorHeap/GPUDescriptorHeap.h"
 
-#include <CDX12/CmdQueue.h>
-#include <CDX12/DXUtil.h>
-#include <CDX12/DescriptorHeapMngr.h>
-#include <CDX12/Device.h>
-#include <CDX12/FrameResourceMngr.h>
-#include <CDX12/GeneralDesc.h>
-#include <CDX12/Metalib.h>
-#include <CDX12/Resource/ResourceStateTracker.h>
-#include <CDX12/Resource/Texture.h>
+#include "CDX12/CmdQueue.h"
+#include "CDX12/DXUtil.h"
+#include "CDX12/DescriptorHeapMngr.h"
+#include "CDX12/Device.h"
+#include "CDX12/FrameResourceMngr.h"
+#include "CDX12/GeneralDesc.h"
+#include "CDX12/Metalib.h"
+#include "CDX12/Resource/ResourceStateTracker.h"
+#include "CDX12/Resource/Texture.h"
 
 namespace CDX12 {
     class DX12App {

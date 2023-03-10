@@ -1,6 +1,6 @@
 #pragma once
 
-#include <CDX12/Math/MathHelper.h>
+#include "CDX12/Math/MathHelper.h"
 
 namespace CDX12::Math {
     class alignas(16) Quaternion {

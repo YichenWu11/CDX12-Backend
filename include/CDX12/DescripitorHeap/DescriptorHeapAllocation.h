@@ -23,8 +23,9 @@
 
 #include <d3d12.h>
 
+#include "CDX12/Resource/Resource.h"
 #include "IDescriptorAllocator.h"
-#include <CDX12/Resource/Resource.h>
+
 
 namespace CDX12 {
     class Resource;

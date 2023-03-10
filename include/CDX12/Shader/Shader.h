@@ -2,11 +2,11 @@
 
 #include <optional>
 
-#include <CDX12/DescripitorHeap/DescriptorHeapAllocation.h>
-#include <CDX12/Resource/BufferView.h>
-#include <CDX12/Resource/DescHeapAllocView.h>
-#include <CDX12/Shader/GlobalSamplers.h>
-#include <CDX12/Shader/ShaderVariableType.h>
+#include "CDX12/DescripitorHeap/DescriptorHeapAllocation.h"
+#include "CDX12/Resource/BufferView.h"
+#include "CDX12/Resource/DescHeapAllocView.h"
+#include "CDX12/Shader/GlobalSamplers.h"
+#include "CDX12/Shader/ShaderVariableType.h"
 
 using Microsoft::WRL::ComPtr;
 

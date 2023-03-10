@@ -2,7 +2,7 @@
 
 #include <map>
 
-#include <CDX12/Resource/Mesh.h>
+#include "CDX12/Resource/Mesh.h"
 
 namespace CDX12 {
     struct Vertex : public rtti::Struct {

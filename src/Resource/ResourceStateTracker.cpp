@@ -1,5 +1,6 @@
-#include <CDX12/Resource/Resource.h>
-#include <CDX12/Resource/ResourceStateTracker.h>
+#include "CDX12/Resource/ResourceStateTracker.h"
+#include "CDX12/Resource/Resource.h"
+
 
 namespace CDX12::detail {
     static bool IsWriteState(D3D12_RESOURCE_STATES state) {

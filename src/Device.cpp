@@ -1,4 +1,4 @@
-#include <CDX12/Device.h>
+#include "CDX12/Device.h"
 
 namespace CDX12 {
     void Device::CreateCommittedResource(

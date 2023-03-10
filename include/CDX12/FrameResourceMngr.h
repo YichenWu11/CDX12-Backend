@@ -1,6 +1,6 @@
 #pragma once
 
-#include <CDX12/FrameResource.h>
+#include "CDX12/FrameResource.h"
 
 namespace CDX12 {
     class FrameResourceMngr {

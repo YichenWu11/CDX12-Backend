@@ -1,6 +1,7 @@
-#include <CDX12/GeneralDesc.h>
-#include <CDX12/Resource/Buffer.h>
-#include <CDX12/Shader/Shader.h>
+#include "CDX12/Shader/Shader.h"
+#include "CDX12/GeneralDesc.h"
+#include "CDX12/Resource/Buffer.h"
+
 
 namespace CDX12 {
     std::optional<Shader::InsideProperty> Shader::GetProperty(std::string_view str) const {

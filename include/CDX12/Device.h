@@ -1,8 +1,9 @@
 #pragma once
 
-#include "DXUtil.h"
 #include <d3d12.h>
 #include <unknwnbase.h>
+
+#include "DXUtil.h"
 
 namespace CDX12 {
     // raw : Microsoft::WRL::ComPtr<ID3D12Device>

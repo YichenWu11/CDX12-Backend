@@ -1,4 +1,4 @@
-#include <CDX12/FrameResource.h>
+#include "CDX12/FrameResource.h"
 
 namespace CDX12 {
     FrameResource::FrameResource(UINT64 cpuFence, ID3D12Fence* gpuFence, ID3D12Device* device) :

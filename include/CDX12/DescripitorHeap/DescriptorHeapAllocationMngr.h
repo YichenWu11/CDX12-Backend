@@ -1,12 +1,12 @@
 #pragma once
 
-#include "../VarSizeAllocMngr.h"
-#include "DescriptorHeapAllocation.h"
-#include "IDescriptorAllocator.h"
-
 #include <atlbase.h>
 #include <d3d12.h>
 #include <mutex>
+
+#include "../VarSizeAllocMngr.h"
+#include "DescriptorHeapAllocation.h"
+#include "IDescriptorAllocator.h"
 
 namespace CDX12 {
     /*

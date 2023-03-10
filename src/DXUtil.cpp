@@ -1,5 +1,5 @@
-#include <CDX12/DXUtil.h>
-#include <CDX12/Metalib.h>
+#include "CDX12/DXUtil.h"
+#include "CDX12/Metalib.h"
 
 #include <comdef.h>
 #include <fstream>

@@ -1,4 +1,4 @@
-#include <CDX12/FrameResourceMngr.h>
+#include "CDX12/FrameResourceMngr.h"
 
 namespace CDX12 {
     FrameResourceMngr::FrameResourceMngr(size_t numFrame, ID3D12Device* device) {
