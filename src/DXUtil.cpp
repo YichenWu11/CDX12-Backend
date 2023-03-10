@@ -98,9 +98,10 @@ namespace CDX12 {
         const D3D_SHADER_MACRO* defines,
         const std::string&      entrypoint,
         const std::string&      target) {
-        UINT compileFlags = 0;
+        UINT compileFlags = D3DCOMPILE_ENABLE_UNBOUNDED_DESCRIPTOR_TABLES;
+
 #if defined(DEBUG) || defined(_DEBUG)
-        compileFlags = D3DCOMPILE_DEBUG | D3DCOMPILE_SKIP_OPTIMIZATION; // 调试模式 | 指示编译器跳过优化阶段
+        compileFlags |= D3DCOMPILE_DEBUG | D3DCOMPILE_SKIP_OPTIMIZATION; // 调试模式 | 指示编译器跳过优化阶段
 #endif
 
         HRESULT hr = S_OK;

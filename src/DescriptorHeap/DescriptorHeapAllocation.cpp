@@ -2,7 +2,6 @@
 #include "CDX12/DescripitorHeap/IDescriptorAllocator.h"
 #include <memory>
 
-
 namespace CDX12 {
     DescriptorHeapAllocation::DescriptorHeapAllocation(
         IDescriptorAllocator*       pAllocator,

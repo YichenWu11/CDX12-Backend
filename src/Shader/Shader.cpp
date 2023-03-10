@@ -2,7 +2,6 @@
 #include "CDX12/GeneralDesc.h"
 #include "CDX12/Resource/Buffer.h"
 
-
 namespace CDX12 {
     std::optional<Shader::InsideProperty> Shader::GetProperty(std::string_view str) const {
         auto ite = properties.find(std::string(str));
@@ -36,6 +35,7 @@ namespace CDX12 {
             properties.insert_or_assign(std::move(i.first), i.second);
             switch (var.type) {
                 case ShaderVariableType::UAVDescriptorHeap:
+                case ShaderVariableType::BindlessSRVDescriptorHeap:
                 case ShaderVariableType::SRVDescriptorHeap: {
                     allRange.emplace_back();
                 } break;
@@ -51,6 +51,15 @@ namespace CDX12 {
                     CD3DX12_DESCRIPTOR_RANGE& range = allRange[offset];
                     offset++;
                     range.Init(D3D12_DESCRIPTOR_RANGE_TYPE_SRV, var.arrSize == 0 ? 1 : var.arrSize, var.registerIndex, var.spaceIndex);
+                    auto&& v = allParameter.emplace_back();
+                    memset(&v, 0, sizeof(CD3DX12_ROOT_PARAMETER));
+                    v.InitAsDescriptorTable(1, &range);
+                } break;
+
+                case ShaderVariableType::BindlessSRVDescriptorHeap: {
+                    CD3DX12_DESCRIPTOR_RANGE& range = allRange[offset];
+                    offset++;
+                    range.Init(D3D12_DESCRIPTOR_RANGE_TYPE_SRV, -1, var.registerIndex, var.spaceIndex);
                     auto&& v = allParameter.emplace_back();
                     memset(&v, 0, sizeof(CD3DX12_ROOT_PARAMETER));
                     v.InitAsDescriptorTable(1, &range);
@@ -135,6 +144,7 @@ namespace CDX12 {
         if (!var) return false;
         switch (var->type) {
             case ShaderVariableType::UAVDescriptorHeap:
+            case ShaderVariableType::BindlessSRVDescriptorHeap:
             case ShaderVariableType::SRVDescriptorHeap: {
                 cmdList->SetGraphicsRootDescriptorTable(
                     var->rootSigPos,

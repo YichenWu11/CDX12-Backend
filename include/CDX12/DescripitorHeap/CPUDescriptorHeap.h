@@ -1,9 +1,9 @@
 #pragma once
 
+#include <unordered_set>
+
 #include "DescriptorHeapAllocationMngr.h"
 #include "IDescriptorAllocator.h"
-
-#include <unordered_set>
 
 namespace CDX12 {
     // CPU descriptor heap is intended to provide storage for resource view descriptor handles.

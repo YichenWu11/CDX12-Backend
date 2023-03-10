@@ -1,6 +1,6 @@
-#include "CDX12/GCmdList.h"
-
 #include <directxtk12/DirectXHelpers.h>
+
+#include "CDX12/GCmdList.h"
 
 namespace CDX12 {
     void GCmdList::Reset(ID3D12CommandAllocator* pAllocator) {
