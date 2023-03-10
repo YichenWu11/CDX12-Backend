@@ -2,7 +2,7 @@
 
 #include <CDX12/FrameResource.h>
 
-namespace Chen::CDX12 {
+namespace CDX12 {
     class FrameResourceMngr {
     public:
         FrameResourceMngr(size_t numFrame, ID3D12Device*);
@@ -24,4 +24,4 @@ namespace Chen::CDX12 {
         size_t                                      cpuFence{0};
         Microsoft::WRL::ComPtr<ID3D12Fence>         gpuFence;
     };
-} // namespace Chen::CDX12
+} // namespace CDX12

@@ -4,7 +4,7 @@
 
 using Microsoft::WRL::ComPtr;
 
-namespace Chen::CDX12 {
+namespace CDX12 {
     class FrameResource;
 
     class Resource {
@@ -28,4 +28,4 @@ namespace Chen::CDX12 {
         virtual D3D12_RESOURCE_STATES GetInitState() const { return D3D12_RESOURCE_STATE_COMMON; }
         virtual void                  DelayDispose(FrameResource* frameRes) const {}
     };
-} // namespace Chen::CDX12
+} // namespace CDX12

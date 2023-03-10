@@ -4,7 +4,7 @@
 
 #define MaxLightsNum 32
 
-namespace Chen::CDX12 {
+namespace CDX12 {
     struct Light {
         DirectX::XMFLOAT3 Strength     = {0.5f, 0.5f, 0.5f};
         float             FalloffStart = 1.0f;                // point/spot light only
@@ -13,4 +13,4 @@ namespace Chen::CDX12 {
         DirectX::XMFLOAT3 Position     = {0.0f, 0.0f, 0.0f};  // point/spot light only
         float             SpotPower    = 64.0f;               // spot light only
     };
-} // namespace Chen::CDX12
+} // namespace CDX12

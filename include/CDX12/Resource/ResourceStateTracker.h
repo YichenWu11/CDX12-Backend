@@ -5,7 +5,7 @@
 
 #include <CDX12/DXUtil.h>
 
-namespace Chen::CDX12 {
+namespace CDX12 {
     class Resource;
     class ResourceStateTracker {
     private:
@@ -33,4 +33,4 @@ namespace Chen::CDX12 {
         void UpdateState(ID3D12GraphicsCommandList* cmdList);
         void RestoreState(ID3D12GraphicsCommandList* cmdList);
     };
-} // namespace Chen::CDX12
+} // namespace CDX12

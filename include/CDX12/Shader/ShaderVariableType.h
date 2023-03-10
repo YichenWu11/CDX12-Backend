@@ -2,7 +2,7 @@
 
 #include "../DXUtil.h"
 
-namespace Chen::CDX12 {
+namespace CDX12 {
     enum class ShaderVariableType : uint8_t {
         ConstantBuffer,
         CBVDescriptorHeap,
@@ -31,4 +31,4 @@ namespace Chen::CDX12 {
             registerPos(registerPos),
             space(space) {}
     };
-} // namespace Chen::CDX12
+} // namespace CDX12

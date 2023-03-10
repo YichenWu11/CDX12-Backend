@@ -3,7 +3,7 @@
 #include <deque>
 #include <map>
 
-namespace Chen::CDX12 {
+namespace CDX12 {
     // The class handles free memory block management to accommodate variable-size allocation requests.
     // It keeps track of free blocks only and does not record allocation sizes. The class uses two ordered maps
     // to facilitate operations. The first map keeps blocks sorted by their offsets. The second multimap keeps blocks
@@ -98,7 +98,7 @@ namespace Chen::CDX12 {
 
         ~VarSizeGPUAllocMngr() = default;
 
-        VarSizeGPUAllocMngr(VarSizeGPUAllocMngr&& rhs);
+        VarSizeGPUAllocMngr(VarSizeGPUAllocMngr&& rhs) noexcept;
 
         VarSizeGPUAllocMngr& operator=(VarSizeGPUAllocMngr&& rhs)  = default;
         VarSizeGPUAllocMngr(const VarSizeGPUAllocMngr&)            = delete;
@@ -125,4 +125,4 @@ namespace Chen::CDX12 {
         // record the Allocation Blocks that will be freed
         std::deque<FreedAllocationInfo> m_StaleAllocations;
     };
-} // namespace Chen::CDX12
+} // namespace CDX12

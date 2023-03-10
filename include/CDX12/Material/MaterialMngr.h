@@ -3,7 +3,7 @@
 #include <CDX12/DXUtil.h>
 #include <CDX12/Math/MathHelper.h>
 
-namespace Chen::CDX12 {
+namespace CDX12 {
     // The Top Material class
     struct BasicMaterial {
         std::string         Name;                     // Unique material name for lookup.
@@ -49,4 +49,4 @@ namespace Chen::CDX12 {
     private:
         std::map<std::string, std::unique_ptr<BasicMaterial>> mMaterials;
     };
-} // namespace Chen::CDX12
+} // namespace CDX12

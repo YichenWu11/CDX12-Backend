@@ -4,7 +4,7 @@
 
 #include <CDX12/Resource/Mesh.h>
 
-namespace Chen::CDX12 {
+namespace CDX12 {
     struct Vertex : public rtti::Struct {
         rtti::Var<DirectX::XMFLOAT3> position  = "POSITION";
         rtti::Var<DirectX::XMFLOAT3> normal    = "NORMAL";
@@ -50,4 +50,4 @@ namespace Chen::CDX12 {
         std::map<std::string, std::unique_ptr<Mesh>> m_meshmap;
     };
 
-} // namespace Chen::CDX12
+} // namespace CDX12

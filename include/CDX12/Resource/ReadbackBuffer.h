@@ -2,7 +2,7 @@
 
 #include <CDX12/Resource/Buffer.h>
 
-namespace Chen::CDX12 {
+namespace CDX12 {
     class ReadbackBuffer final : public Buffer {
     private:
         ComPtr<ID3D12Resource> resource;
@@ -27,4 +27,4 @@ namespace Chen::CDX12 {
         ReadbackBuffer(ReadbackBuffer const&) = delete;
         void DelayDispose(FrameResource* frameRes) const override;
     };
-} // namespace Chen::CDX12
+} // namespace CDX12

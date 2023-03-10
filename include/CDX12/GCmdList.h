@@ -2,23 +2,21 @@
 
 #include "DXUtil.h"
 
-namespace Chen::CDX12 {
-	struct GCmdList : ComPtrHolder<ID3D12GraphicsCommandList> {
-		using ComPtrHolder<ID3D12GraphicsCommandList>::ComPtrHolder;
+namespace CDX12 {
+    struct GCmdList : ComPtrHolder<ID3D12GraphicsCommandList> {
+        using ComPtrHolder<ID3D12GraphicsCommandList>::ComPtrHolder;
 
         void Reset(ID3D12CommandAllocator* pAllocator);
 
         void ResourceBarrierTransition(
-            ID3D12Resource* resource,
+            ID3D12Resource*       resource,
             D3D12_RESOURCE_STATES from,
-            D3D12_RESOURCE_STATES to
-        );
+            D3D12_RESOURCE_STATES to);
 
         // D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV, D3D12_DESCRIPTOR_HEAP_TYPE_SAMPLER
-        template<typename... Heaps,
-            typename = std::enable_if_t<
-            sizeof...(Heaps) <= static_cast<size_t>(2) &&
-            (std::is_same_v<Heaps, ID3D12DescriptorHeap>&&...) >>
+        template <typename... Heaps,
+                  typename = std::enable_if_t<
+                      sizeof...(Heaps) <= static_cast<size_t>(2) && (std::is_same_v<Heaps, ID3D12DescriptorHeap> && ...)>>
         void SetDescriptorHeaps(Heaps*... heaps);
 
         void ClearRenderTargetView(D3D12_CPU_DESCRIPTOR_HANDLE RenderTargetView, const FLOAT color[4]);
@@ -37,8 +35,8 @@ namespace Chen::CDX12 {
         void DrawIndexed(
             UINT IndexCount,
             UINT StartIndexLocation,
-            INT BaseVertexLocation);
+            INT  BaseVertexLocation);
     };
-}
+} // namespace CDX12
 
 #include "details/GCmdList.inl"

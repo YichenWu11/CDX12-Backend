@@ -2,7 +2,7 @@
 
 #include "../DXUtil.h"
 
-namespace Chen::CDX12 {
+namespace CDX12 {
     class DescriptorHeapWrapper : ComPtrHolder<ID3D12DescriptorHeap> {
     public:
         DescriptorHeapWrapper() { memset(this, 0, sizeof(DescriptorHeapWrapper)); }
@@ -48,4 +48,4 @@ namespace Chen::CDX12 {
         D3D12_GPU_DESCRIPTOR_HANDLE hGPUHeapStart;
         UINT                        HandleIncrementSize;
     };
-} // namespace Chen::CDX12
+} // namespace CDX12

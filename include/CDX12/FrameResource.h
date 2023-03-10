@@ -16,8 +16,7 @@
 #include <CDX12/Util/BindProperty.h>
 #include <CDX12/Util/StackAllocator.h>
 
-
-namespace Chen::CDX12 {
+namespace CDX12 {
     struct IndirectDrawCommand {
         D3D12_GPU_VIRTUAL_ADDRESS    object_cbuffer_address; // Object Constant Buffer Address
         D3D12_VERTEX_BUFFER_VIEW     vertex_buffer;          // Vertex Buffer Address
@@ -41,12 +40,13 @@ namespace Chen::CDX12 {
         void       Upload(BufferView const& buffer, void const* src);
         void       Download(BufferView const& buffer, void* dst);
         BufferView AllocateConstBuffer(std::span<uint8_t const> data);
-        void       CopyBuffer(
-                  Buffer const* src,
-                  Buffer const* dst,
-                  uint64        srcOffset,
-                  uint64        dstOffset,
-                  uint64        byteSize);
+
+        void CopyBuffer(
+            Buffer const* src,
+            Buffer const* dst,
+            uint64        srcOffset,
+            uint64        dstOffset,
+            uint64        byteSize);
 
         void SetRenderTarget(
             Texture const*                       tex,
@@ -74,7 +74,7 @@ namespace Chen::CDX12 {
             uint32_t                                  mesh_count,
             ID3D12CommandSignature*                   command_sign);
 
-        Chen::CDX12::IndirectDrawCommand getIndirectArguments(Chen::CDX12::Mesh* mesh, D3D12_GPU_VIRTUAL_ADDRESS, uint32_t offset, uint32_t per_size);
+        CDX12::IndirectDrawCommand getIndirectArguments(CDX12::Mesh* mesh, D3D12_GPU_VIRTUAL_ADDRESS, uint32_t offset, uint32_t per_size);
 
     private:
         static constexpr size_t TEMP_SIZE = 1024ull * 1024ull;
@@ -120,4 +120,4 @@ namespace Chen::CDX12 {
 
         std::vector<std::function<void()>> afterSyncEvents;
     };
-} // namespace Chen::CDX12
+} // namespace CDX12

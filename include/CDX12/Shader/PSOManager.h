@@ -26,7 +26,7 @@ namespace std {
 
 using Microsoft::WRL::ComPtr;
 
-namespace Chen::CDX12 {
+namespace CDX12 {
     class BasicShader;
 
     class PSOManager {
@@ -45,4 +45,4 @@ namespace Chen::CDX12 {
             DXGI_FORMAT                               depthFormat,
             D3D12_PRIMITIVE_TOPOLOGY_TYPE             topologyType = D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE);
     };
-} // namespace Chen::CDX12
+} // namespace CDX12

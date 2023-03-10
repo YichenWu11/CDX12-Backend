@@ -4,7 +4,7 @@
 #include "DescriptorHeapAllocationMngr.h"
 #include "IDescriptorAllocator.h"
 
-namespace Chen::CDX12 {
+namespace CDX12 {
     // GPU descriptor heap provides storage for shader-visible descriptors
     // The heap contains single D3D12 descriptor heap that is split into two parts.
     // The first part stores static and mutable resource descriptor handles.
@@ -88,4 +88,4 @@ namespace Chen::CDX12 {
         std::mutex                   m_DynAllocMutex;
         DescriptorHeapAllocationMngr m_DynamicAllocationsManager;
     };
-} // namespace Chen::CDX12
+} // namespace CDX12

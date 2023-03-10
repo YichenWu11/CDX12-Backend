@@ -4,7 +4,7 @@
 #include <Windows.h>
 #include <cstdint>
 
-namespace Chen::CDX12::Math {
+namespace CDX12::Math {
 
     class MathHelper {
     public:
@@ -80,4 +80,4 @@ namespace Chen::CDX12::Math {
         static const float Infinity;
         static const float Pi;
     };
-} // namespace Chen::CDX12::Math
+} // namespace CDX12::Math

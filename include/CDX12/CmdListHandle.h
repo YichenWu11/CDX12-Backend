@@ -7,7 +7,7 @@
 
 #include <CDX12/DXUtil.h>
 
-namespace Chen::CDX12 {
+namespace CDX12 {
     class CmdListHandle {
         ID3D12GraphicsCommandList* cmdList;
 
@@ -25,4 +25,4 @@ namespace Chen::CDX12 {
         ~CmdListHandle();
     };
 
-} // namespace Chen::CDX12
+} // namespace CDX12

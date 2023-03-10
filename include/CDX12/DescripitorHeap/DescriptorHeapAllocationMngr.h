@@ -8,7 +8,7 @@
 #include <d3d12.h>
 #include <mutex>
 
-namespace Chen::CDX12 {
+namespace CDX12 {
     /*
         Every allocation that the class creates is represented by an instance of DescriptorHeapAllocation class.
         The list of free descriptors is managed by m_FreeBlocksManager member
@@ -85,4 +85,4 @@ namespace Chen::CDX12 {
         // Strong reference to D3D12 descriptor heap object
         CComPtr<ID3D12DescriptorHeap> m_pd3d12DescriptorHeap;
     };
-} // namespace Chen::CDX12
+} // namespace CDX12

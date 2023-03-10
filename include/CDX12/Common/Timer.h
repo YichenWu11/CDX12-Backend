@@ -1,6 +1,6 @@
 #pragma once
 
-namespace Chen::CDX12 {
+namespace CDX12 {
     class Timer {
     public:
         Timer();
@@ -25,4 +25,4 @@ namespace Chen::CDX12 {
 
         bool mStopped;
     };
-} // namespace Chen::CDX12
+} // namespace CDX12

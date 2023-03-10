@@ -3,7 +3,7 @@
 #include <CDX12/DXUtil.h>
 #include <CDX12/Math/Quaternion.h>
 
-namespace Chen::CDX12 {
+namespace CDX12 {
     class Camera {
     public:
         Camera();
@@ -82,4 +82,4 @@ namespace Chen::CDX12 {
         DirectX::XMFLOAT4X4 mView = Math::MathHelper::Identity4x4();
         DirectX::XMFLOAT4X4 mProj = Math::MathHelper::Identity4x4();
     };
-} // namespace Chen::CDX12
+} // namespace CDX12

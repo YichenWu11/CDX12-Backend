@@ -2,7 +2,7 @@
 
 #include <CDX12/Resource/Buffer.h>
 
-namespace Chen::CDX12 {
+namespace CDX12 {
 
     class DefaultBuffer final : public Buffer {
     private:
@@ -29,4 +29,4 @@ namespace Chen::CDX12 {
         DefaultBuffer(DefaultBuffer const&) = delete;
         void DelayDispose(FrameResource* frameRes) const override;
     };
-} // namespace Chen::CDX12
+} // namespace CDX12

@@ -2,7 +2,7 @@
 
 #include <CDX12/DescripitorHeap/DescriptorHeapAllocation.h>
 
-namespace Chen::CDX12 {
+namespace CDX12 {
     struct DescriptorHeapAllocView {
         DescriptorHeapAllocation const* heap;
         uint64                          index;
@@ -19,4 +19,4 @@ namespace Chen::CDX12 {
             index(0) {}
     };
 
-} // namespace Chen::CDX12
+} // namespace CDX12

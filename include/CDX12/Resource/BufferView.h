@@ -7,7 +7,7 @@
 
 #include <CDX12/DXUtil.h>
 
-namespace Chen::CDX12 {
+namespace CDX12 {
     class Buffer;
 
     struct BufferView {
@@ -28,4 +28,4 @@ namespace Chen::CDX12 {
             return !operator==(a);
         }
     };
-} // namespace Chen::CDX12
+} // namespace CDX12

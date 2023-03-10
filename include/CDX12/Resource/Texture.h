@@ -4,7 +4,7 @@
 
 #include <CDX12/Resource/Resource.h>
 
-namespace Chen::CDX12 {
+namespace CDX12 {
     enum class TextureDimension : uint8_t {
         None = 0,
         Tex1D,
@@ -79,4 +79,4 @@ namespace Chen::CDX12 {
         uint GetWidth() { return resource->GetDesc().Width; }
         uint GetHeight() { return resource->GetDesc().Height; };
     };
-} // namespace Chen::CDX12
+} // namespace CDX12

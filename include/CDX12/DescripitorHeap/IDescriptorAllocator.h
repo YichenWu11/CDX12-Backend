@@ -2,7 +2,7 @@
 
 #include "../DXUtil.h"
 
-namespace Chen::CDX12 {
+namespace CDX12 {
     class DescriptorHeapAllocation;
     class DescriptorHeapAllocationMngr;
     class IDescriptorAllocator {
@@ -12,4 +12,4 @@ namespace Chen::CDX12 {
         virtual void                     Free(DescriptorHeapAllocation&& Allocation) = 0;
         virtual uint32_t                 GetDescriptorSize() const                   = 0;
     };
-} // namespace Chen::CDX12
+} // namespace CDX12

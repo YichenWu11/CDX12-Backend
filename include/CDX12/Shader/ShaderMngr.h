@@ -1,6 +1,6 @@
 #include <CDX12/Shader/Shader.h>
 
-namespace Chen::CDX12 {
+namespace CDX12 {
     class ShaderMngr {
     public:
         ShaderMngr(ID3D12Device* _device);
@@ -23,4 +23,4 @@ namespace Chen::CDX12 {
 
         std::map<std::string, std::unique_ptr<Shader>> m_shader_map;
     };
-} // namespace Chen::CDX12
+} // namespace CDX12

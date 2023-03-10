@@ -16,7 +16,7 @@
 #include <CDX12/Resource/ResourceStateTracker.h>
 #include <CDX12/Resource/Texture.h>
 
-namespace Chen::CDX12 {
+namespace CDX12 {
     class DX12App {
     protected:
         DX12App(HINSTANCE hInstance);
@@ -136,4 +136,4 @@ namespace Chen::CDX12 {
         uint32_t numGpuCSU_static  = 648;
         uint32_t numGpuCSU_dynamic = 648;
     };
-} // namespace Chen::CDX12
+} // namespace CDX12

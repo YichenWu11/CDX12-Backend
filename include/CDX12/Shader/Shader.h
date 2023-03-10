@@ -10,7 +10,7 @@
 
 using Microsoft::WRL::ComPtr;
 
-namespace Chen::CDX12 {
+namespace CDX12 {
     class Shader {
     public:
         struct Property {
@@ -67,4 +67,4 @@ namespace Chen::CDX12 {
 
         virtual ~Shader() = default;
     };
-} // namespace Chen::CDX12
+} // namespace CDX12

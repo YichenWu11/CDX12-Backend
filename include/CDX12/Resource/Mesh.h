@@ -7,7 +7,7 @@
 #include <CDX12/Resource/Resource.h>
 #include <CDX12/Util/ReflactableStruct.h>
 
-namespace Chen::CDX12 {
+namespace CDX12 {
     class Mesh : public Resource {
         uint32_t                              vertexCount;
         std::span<rtti::Struct const*>        vertexStructs;
@@ -36,4 +36,4 @@ namespace Chen::CDX12 {
 
         DirectX::BoundingBox bounding_box;
     };
-} // namespace Chen::CDX12
+} // namespace CDX12

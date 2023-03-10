@@ -7,7 +7,7 @@
 #include <CDX12/DXUtil.h>
 #include <CDX12/Metalib.h>
 
-namespace Chen::CDX12::rtti {
+namespace CDX12::rtti {
     // Interpret a variable's type in structure
     struct VarTypeData {
         enum class ScaleType : vbyte {
@@ -130,4 +130,4 @@ namespace Chen::CDX12::rtti {
         Var(char const* semantic) :
             VarType<DirectX::XMINT4>(VarTypeData{VarTypeData::ScaleType::Int, vbyte(4), uint(0), std::string(semantic)}) {}
     };
-} // namespace Chen::CDX12::rtti
+} // namespace CDX12::rtti

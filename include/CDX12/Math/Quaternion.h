@@ -2,7 +2,7 @@
 
 #include <CDX12/Math/MathHelper.h>
 
-namespace Chen::CDX12::Math {
+namespace CDX12::Math {
     class alignas(16) Quaternion {
     public:
         Quaternion() { m_vec = DirectX::XMQuaternionIdentity(); }
@@ -31,4 +31,4 @@ namespace Chen::CDX12::Math {
     private:
         DirectX::XMVECTOR m_vec;
     };
-} // namespace Chen::CDX12::Math
+} // namespace CDX12::Math

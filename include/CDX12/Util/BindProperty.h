@@ -6,7 +6,7 @@
 #include <CDX12/Resource/BufferView.h>
 #include <CDX12/Resource/DescHeapAllocView.h>
 
-namespace Chen::CDX12 {
+namespace CDX12 {
     struct BindProperty {
         std::string name;
         std::variant<
@@ -25,4 +25,4 @@ namespace Chen::CDX12 {
             name(std::forward<A>(a)),
             prop(std::forward<B>(b)) {}
     };
-} // namespace Chen::CDX12
+} // namespace CDX12

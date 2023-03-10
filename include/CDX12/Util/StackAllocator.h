@@ -1,7 +1,7 @@
 #pragma once
 #include <CDX12/DXUtil.h>
 
-namespace Chen::CDX12 {
+namespace CDX12 {
     class IStackAllocVisitor {
     public:
         virtual uint64 Allocate(uint64 size)     = 0;
@@ -35,4 +35,4 @@ namespace Chen::CDX12 {
         void Clear();
     };
 
-} // namespace Chen::CDX12
+} // namespace CDX12

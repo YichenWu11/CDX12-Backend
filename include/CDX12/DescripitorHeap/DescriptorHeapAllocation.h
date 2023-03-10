@@ -26,7 +26,7 @@
 #include "IDescriptorAllocator.h"
 #include <CDX12/Resource/Resource.h>
 
-namespace Chen::CDX12 {
+namespace CDX12 {
     class Resource;
 
     // contains the first CPU handle in CPU virtual address space, and,
@@ -121,4 +121,4 @@ namespace Chen::CDX12 {
         // Descriptor size
         uint16_t m_DescriptorSize = 0;
     };
-} // namespace Chen::CDX12
+} // namespace CDX12

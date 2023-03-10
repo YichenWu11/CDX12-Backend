@@ -13,7 +13,7 @@
 #include <CDX12/Resource/BufferView.h>
 #include <CDX12/Resource/Resource.h>
 
-namespace Chen::CDX12 {
+namespace CDX12 {
     class Buffer : public Resource {
     public:
         Buffer(ID3D12Device* device);
@@ -23,4 +23,4 @@ namespace Chen::CDX12 {
         virtual D3D12_GPU_VIRTUAL_ADDRESS GetAddress() const  = 0;
         virtual ~Buffer();
     };
-} // namespace Chen::CDX12
+} // namespace CDX12

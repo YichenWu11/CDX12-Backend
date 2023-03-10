@@ -4,7 +4,7 @@
 
 using namespace Microsoft::WRL;
 
-namespace Chen::CDX12 {
+namespace CDX12 {
     inline std::wstring AnsiToWString(const std::string& str) {
         WCHAR buffer[512];
         MultiByteToWideChar(CP_ACP, 0, str.c_str(), -1, buffer, 512);
@@ -21,34 +21,6 @@ namespace Chen::CDX12 {
         bool     IsNull() const noexcept { return raw.Get() == nullptr; }
         T*       Get() const noexcept { return raw.Get(); }
     };
-
-    /*
-    #if defined(_DEBUG)
-        #ifndef Assert
-        #define Assert(x, description)                                  \
-        {                                                               \
-            static bool ignoreAssert = false;                           \
-            if(!ignoreAssert && !(x))                                   \
-            {                                                           \
-                Debug::AssertResult result = Debug::ShowAssertDialog(   \
-                (L#x), description, AnsiToWString(__FILE__), __LINE__); \
-            if(result == Debug::AssertIgnore)                           \
-            {                                                           \
-                ignoreAssert = true;                                    \
-            }                                                           \
-                        else if(result == Debug::AssertBreak)           \
-            {                                                           \
-                __debugbreak();                                         \
-            }                                                           \
-            }                                                           \
-        }
-        #endif
-    #else
-        #ifndef Assert
-        #define Assert(x, description)
-        #endif
-    #endif
-        */
 
     class DXUtil {
     public:
@@ -99,7 +71,7 @@ namespace Chen::CDX12 {
         std::wstring Filename;
         int          LineNumber = -1;
     };
-} // namespace Chen::CDX12
+} // namespace CDX12
 
 #ifndef ThrowIfFailed
 #define ThrowIfFailed(x) \

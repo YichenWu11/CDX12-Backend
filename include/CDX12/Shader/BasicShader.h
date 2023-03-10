@@ -4,7 +4,7 @@
 
 using Microsoft::WRL::ComPtr;
 
-namespace Chen::CDX12 {
+namespace CDX12 {
     class BasicShader : public Shader {
     public:
         ComPtr<ID3DBlob>                      vsShader = nullptr;
@@ -55,4 +55,4 @@ namespace Chen::CDX12 {
         void SetDepthStencilState(D3D12_DEPTH_STENCIL_DESC desc) { depthStencilState = desc; }
         void SetBlendState(D3D12_BLEND_DESC desc) { blendState = desc; }
     };
-} // namespace Chen::CDX12
+} // namespace CDX12
