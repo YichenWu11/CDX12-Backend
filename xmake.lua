@@ -21,3 +21,7 @@ target("Lib_CDX12")
     add_includedirs("include")
     set_pcxxheader("include/CDX12/pch.h")
     add_packages("vcpkg::directxtk12")
+    if is_mode("debug") then 
+        add_defines("DEBUG")
+        add_defines("_DEBUG")
+    end

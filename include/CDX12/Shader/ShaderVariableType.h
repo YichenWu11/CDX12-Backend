@@ -7,7 +7,6 @@ namespace CDX12 {
         ConstantBuffer,
         CBVDescriptorHeap,
         SRVDescriptorHeap,
-        BindlessSRVDescriptorHeap,
         UAVDescriptorHeap,
         StructuredBuffer,
         RWStructuredBuffer
