@@ -1,0 +1,8 @@
+target("CDX12-TEST")
+    set_kind("binary")
+    add_files("src/**.cpp")
+    add_headerfiles("include/**.h")
+    add_includedirs("include")
+    add_deps("Lib_CDX12")
+    add_packages("vcpkg::directxtk12")
+target_end()
